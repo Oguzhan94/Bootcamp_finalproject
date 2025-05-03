@@ -73,4 +73,6 @@ dependencies {
     implementation(libs.hilt.android.compiler)
     //Firebase
     implementation(libs.firebase.auth)
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
 }
