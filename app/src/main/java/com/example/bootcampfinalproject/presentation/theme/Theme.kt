@@ -1,6 +1,5 @@
-package com.example.bootcampfinalproject.ui.theme
+package com.example.bootcampfinalproject.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

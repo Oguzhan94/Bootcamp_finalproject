@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.ui.theme
+package com.example.bootcampfinalproject.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
