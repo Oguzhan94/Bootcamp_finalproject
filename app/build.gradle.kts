@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.hilt.android.compiler)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -42,6 +45,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -57,4 +61,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //RoomDatabase
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.room.ktx)
+    //Retrofit
+    implementation (libs.retrofit)
+    implementation (libs.gson)
+    //Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.android.compiler)
+    //Firebase
+    implementation(libs.firebase.auth)
 }
