@@ -2,9 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.hilt.android.compiler)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinx.serialization.plugin)
 }
 
 android {
@@ -70,7 +71,7 @@ dependencies {
     implementation (libs.gson)
     //Hilt
     implementation(libs.hilt.android)
-    implementation(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
     //Firebase
     implementation(libs.firebase.auth)
     //Navigation
