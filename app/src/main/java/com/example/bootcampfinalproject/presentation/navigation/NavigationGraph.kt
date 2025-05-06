@@ -5,8 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
-import com.example.bootcampfinalproject.presentation.login.LoginScreen
-import com.example.bootcampfinalproject.presentation.register.RegisterScreen
+import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreen
+import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreen
 
 @Composable
 fun NavigationGraph(

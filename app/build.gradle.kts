@@ -72,8 +72,14 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
     //Firebase
     implementation(libs.firebase.auth)
     //Navigation
     implementation(libs.androidx.navigation.compose)
+    //Material icon
+    implementation (libs.androidx.material.icons.extended)
+    //Splashscreen
+    implementation(libs.androidx.core.splashscreen)
+
 }
