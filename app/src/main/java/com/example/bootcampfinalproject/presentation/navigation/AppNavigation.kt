@@ -99,7 +99,19 @@ fun AppNavigation(startDestination: Screen) {
                             selected = currentDestination?.hierarchy?.any {
                                 it.route?.contains(item.screen::class.simpleName ?: "") == true
                             } == true,
-                            onClick = { navController.navigate(item.screen) },
+                            onClick = {
+                                if (item.screen == Screen.HomeScreen) {
+                                    navController.navigate(Screen.HomeScreen) {
+                                        popUpTo(0) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
+                                } else {
+                                    navController.navigate(item.screen) {
+                                        launchSingleTop = true
+                                    }
+                                }
+                            }
+                            ,
                             icon = {
                                 Icon(
                                     item.icon,

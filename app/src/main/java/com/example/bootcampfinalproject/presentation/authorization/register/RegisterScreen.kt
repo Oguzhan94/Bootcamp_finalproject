@@ -41,7 +41,7 @@ import com.example.bootcampfinalproject.presentation.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.components.EmailTextField
 import com.example.bootcampfinalproject.presentation.authorization.components.PasswordTextField
 import com.example.bootcampfinalproject.presentation.navigation.Screen
-import com.example.bootcampfinalproject.presentation.theme.BootcampFinalProjectTheme
+import com.example.bootcampfinalproject.presentation.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -104,7 +104,6 @@ fun RegisterScreen(
                 label = { Text("Full Name") },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = uiState != AuthUiState.Loading,
-                textStyle = TextStyle(color = Color.White),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
             Spacer(Modifier.height(20.dp))
@@ -166,7 +165,7 @@ fun RegisterScreen(
 @Preview()
 @Composable
 fun RegisterScreenPreview() {
-    BootcampFinalProjectTheme {
+    AppTheme {
         Surface(Modifier.fillMaxSize()) { RegisterScreen(rememberNavController()) }
 
     }

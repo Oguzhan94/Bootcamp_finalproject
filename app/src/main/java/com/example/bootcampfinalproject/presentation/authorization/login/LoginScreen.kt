@@ -38,7 +38,7 @@ import com.example.bootcampfinalproject.presentation.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.components.EmailTextField
 import com.example.bootcampfinalproject.presentation.authorization.components.PasswordTextField
 import com.example.bootcampfinalproject.presentation.navigation.Screen
-import com.example.bootcampfinalproject.presentation.theme.BootcampFinalProjectTheme
+import com.example.bootcampfinalproject.presentation.theme.AppTheme
 
 
 @Composable
@@ -139,7 +139,7 @@ fun LoginScreen(navController: NavController){
 @Preview()
 @Composable
 fun LoginScreenPreview() {
-    BootcampFinalProjectTheme {
+    AppTheme {
         Surface(Modifier.fillMaxSize()) {LoginScreen(rememberNavController())  }
 
     }

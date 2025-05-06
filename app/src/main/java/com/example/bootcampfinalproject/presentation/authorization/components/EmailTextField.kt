@@ -22,7 +22,6 @@ fun EmailTextField(
         label = { Text("Email") },
         modifier = Modifier
             .fillMaxWidth(),
-        textStyle = TextStyle(color = Color.White),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
     )
 }
