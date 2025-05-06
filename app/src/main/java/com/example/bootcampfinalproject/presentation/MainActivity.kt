@@ -15,12 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.compose.rememberNavController
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreenViewModel
+import com.example.bootcampfinalproject.presentation.navigation.AppNavigation
 import com.example.bootcampfinalproject.presentation.navigation.NavigationGraph
 import com.example.bootcampfinalproject.presentation.navigation.Screen
-import com.example.bootcampfinalproject.presentation.theme.BootcampFinalProjectTheme
+import com.example.bootcampfinalproject.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: LoginScreenViewModel by viewModels()
@@ -34,29 +35,26 @@ class MainActivity : ComponentActivity() {
         }
 
         enableEdgeToEdge()
+
         setContent {
-            BootcampFinalProjectTheme {
+            AppTheme {
+                val navController = rememberNavController()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
                 val startDestination = when (uiState) {
                     is AuthUiState.Success -> Screen.HomeScreen
                     is AuthUiState.Error,
                     AuthUiState.Idle -> Screen.LoginScreen
                     AuthUiState.Loading -> null
                 }
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(innerPadding)
                     ) {
                         if (startDestination != null) {
-                            NavigationGraph(
-                                startDestination = startDestination
-                            )
+                            AppNavigation(startDestination = startDestination)
                         }
-                    }
+
                 }
             }
         }
