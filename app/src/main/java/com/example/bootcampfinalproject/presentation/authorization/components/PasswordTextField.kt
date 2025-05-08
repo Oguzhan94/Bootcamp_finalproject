@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +24,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 fun PasswordTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    label: String
+    label: String,
+    isError: Boolean = false,
+    errorText: String? = null
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
     OutlinedTextField(
@@ -42,7 +45,18 @@ fun PasswordTextField(
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Password
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        isError = isError,
+        supportingText = {
+            if (isError && errorText != null){
+                Text(
+                    text = errorText,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.labelSmall
+                )
+            }
+        }
+
     )
 }
 

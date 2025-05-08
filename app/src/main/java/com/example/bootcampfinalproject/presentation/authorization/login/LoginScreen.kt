@@ -86,13 +86,17 @@ fun LoginScreen(navController: NavController){
             Spacer(Modifier.height(70.dp))
             EmailTextField(
                 value = viewModel.emailInput,
-                onValueChange = {viewModel.onEmailChange(it)}
+                onValueChange = {viewModel.onEmailChange(it)},
+                isError = viewModel.emailError != null,
+                errorText = viewModel.emailError
             )
             Spacer(Modifier.height(20.dp))
             PasswordTextField(
                 value = viewModel.passwordInput,
                 onValueChange = { viewModel.onPasswordChange(it) },
                 label = "Password",
+                isError = viewModel.passwordError != null,
+                errorText = viewModel.passwordError
             )
             Spacer(Modifier.height(30.dp))
             Button(
@@ -100,7 +104,8 @@ fun LoginScreen(navController: NavController){
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                enabled = viewModel.isFormValid
             ) {
                 Text(text = "Login")
             }

@@ -1,5 +1,6 @@
 package com.example.bootcampfinalproject.presentation.authorization.login
 
+import android.util.Patterns
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -29,13 +30,23 @@ class LoginScreenViewModel @Inject constructor(
         private set
     var passwordInput by mutableStateOf("")
         private set
+    var emailError by mutableStateOf<String?>(null)
+        private set
+    var passwordError by mutableStateOf<String?>(null)
+        private set
+    var isFormValid by mutableStateOf(false)
+        private set
 
     fun onEmailChange(newEmail: String) {
         emailInput = newEmail
+        emailError = if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) null else "Geçerli bir email girin"
+        updateFormValidation()
     }
 
     fun onPasswordChange(newPassword: String) {
         passwordInput = newPassword
+        passwordError = if (newPassword.length >= 6) null else "Şifre en az 6 karakter olmalı"
+        updateFormValidation()
     }
 
     init {
@@ -52,11 +63,11 @@ class LoginScreenViewModel @Inject constructor(
             }
         }
     }
+    private fun updateFormValidation() {
+        isFormValid = emailError == null && passwordError == null
+    }
 
     fun login() {
-        if (emailInput.isBlank() || passwordInput.isBlank()) {
-            _uiState.value = AuthUiState.Error("Please fill in all fields")
-        } else {
             viewModelScope.launch {
                 _uiState.value = AuthUiState.Loading
                 when (val result = loginUseCase(emailInput, passwordInput)) {
@@ -72,7 +83,6 @@ class LoginScreenViewModel @Inject constructor(
                         _uiState.value = AuthUiState.Loading
                     }
                 }
-            }
         }
     }
 }

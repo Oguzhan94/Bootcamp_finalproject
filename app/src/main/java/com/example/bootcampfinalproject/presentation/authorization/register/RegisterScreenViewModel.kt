@@ -1,5 +1,6 @@
 package com.example.bootcampfinalproject.presentation.authorization.register
 
+import android.util.Patterns
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -34,28 +35,52 @@ class RegisterScreenViewModel @Inject constructor(
     var confirmPasswordInput by mutableStateOf("")
         private set
 
+    var emailError by mutableStateOf<String?>(null)
+        private set
+    var passwordError by mutableStateOf<String?>(null)
+        private set
+    var confirmPasswordError by mutableStateOf<String?>(null)
+        private set
+    var fullNameError by mutableStateOf<String?>(null)
+        private set
+    var isFormValid by mutableStateOf(false)
+        private set
+
     fun onEmailChange(newEmail: String) {
         emailInput = newEmail
+        emailError = if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) null else "Geçerli bir email girin"
+        updateFormValidation()
     }
 
     fun onPasswordChange(newPassword: String) {
         passwordInput = newPassword
+        passwordError = if (newPassword.length >= 6) null else "Şifre en az 6 karakter olmalı"
+        updateFormValidation()
     }
 
     fun onConfirmPasswordChange(newPassword: String) {
         confirmPasswordInput = newPassword
+        confirmPasswordError = if (newPassword == passwordInput) null else "Şifreler eşleşmiyor"
+        updateFormValidation()
     }
 
     fun onFullNameChange(newFullName: String) {
         fullNameInput = newFullName
+        fullNameError = if (newFullName.isNotBlank()) null else "Adınızı girin"
+        updateFormValidation()
+    }
+    private fun updateFormValidation() {
+        isFormValid = emailError == null &&
+                passwordError == null &&
+                confirmPasswordError == null &&
+                fullNameError == null &&
+                emailInput.isNotBlank() &&
+                passwordInput.isNotBlank() &&
+                confirmPasswordInput.isNotBlank() &&
+                fullNameInput.isNotBlank()
     }
 
     fun registerUser() {
-        if (emailInput.isBlank() || passwordInput.isBlank() || confirmPasswordInput.isBlank() || fullNameInput.isBlank()) {
-            _uiState.value = Error("Please fill in all fields")
-        } else if (passwordInput != confirmPasswordInput) {
-            _uiState.value = Error("Passwords do not match")
-        } else {
             viewModelScope.launch {
                 _uiState.value = AuthUiState.Loading
                 when (val result = registerUseCase(emailInput, passwordInput)) {
@@ -70,7 +95,6 @@ class RegisterScreenViewModel @Inject constructor(
                     ResponseState.Loading -> {
                         _uiState.value = AuthUiState.Loading
                     }
-                }
             }
         }
     }

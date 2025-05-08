@@ -93,7 +93,9 @@ fun RegisterScreen(
 
             EmailTextField(
                 value = viewModel.emailInput,
-                onValueChange = { viewModel.onEmailChange(it) }
+                onValueChange = { viewModel.onEmailChange(it) },
+                isError = viewModel.emailError != null,
+                errorText = viewModel.emailError
             )
 
             Spacer(Modifier.height(20.dp))
@@ -103,27 +105,40 @@ fun RegisterScreen(
                 onValueChange = { viewModel.onFullNameChange(it) },
                 label = { Text("Full Name") },
                 modifier = Modifier.fillMaxWidth(),
-                enabled = uiState != AuthUiState.Loading,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                isError = viewModel.fullNameError != null,
+                supportingText = {
+                    if (viewModel.fullNameError != null) {
+                        Text(
+                            text = viewModel.fullNameError!!,
+                            color = MaterialTheme.colorScheme.error,
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    }
+                }
             )
             Spacer(Modifier.height(20.dp))
             PasswordTextField(
                 value = viewModel.passwordInput,
                 onValueChange = { viewModel.onPasswordChange(it) },
-                label = "Password"
+                label = "Password",
+                isError = viewModel.passwordError != null,
+                errorText = viewModel.passwordError
             )
             Spacer(Modifier.height(20.dp))
             PasswordTextField(
                 value = viewModel.confirmPasswordInput,
                 onValueChange = { viewModel.onConfirmPasswordChange(it) },
-                label = "Confirm Password"
+                label = "Confirm Password",
+                isError = viewModel.confirmPasswordError != null,
+                errorText = viewModel.confirmPasswordError
             )
             Spacer(Modifier.height(30.dp))
             Button(
                 onClick = { viewModel.registerUser() },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
-                enabled = uiState != AuthUiState.Loading
+                enabled = uiState != AuthUiState.Loading && viewModel.isFormValid
             ) {
                 Text(text = "Register")
             }
