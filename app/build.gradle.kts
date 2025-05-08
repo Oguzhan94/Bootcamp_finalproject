@@ -69,6 +69,8 @@ dependencies {
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.gson)
+    implementation(libs.logging.interceptor)
+    implementation (libs.converter.gson)
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
@@ -81,5 +83,8 @@ dependencies {
     implementation (libs.androidx.material.icons.extended)
     //Splashscreen
     implementation(libs.androidx.core.splashscreen)
-
+    //Paging
+    implementation(libs.paging)
+    implementation(libs.paging.compose)
 }
+
