@@ -28,12 +28,12 @@ object NetworkModule {
         }
 
         return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)  // Logları görmek için log interceptor ekledik.
+            .addInterceptor(loggingInterceptor)
             .addInterceptor(Interceptor { chain ->
                 val original = chain.request()
                 val requestBuilder = original.newBuilder()
                     .header("accept", "application/json")
-                    .url(original.url.newBuilder().addQueryParameter("api_key", TMDB_API_KEY).build())  // API key'i URL query parametresi olarak ekliyoruz
+                    .url(original.url.newBuilder().addQueryParameter("api_key", TMDB_API_KEY).build())
                     .method(original.method, original.body)
 
                 val request = requestBuilder.build()

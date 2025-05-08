@@ -7,6 +7,7 @@ import androidx.paging.map
 import com.example.bootcampfinalproject.data.remote.TmdbApi
 import com.example.bootcampfinalproject.data.remote.mapper.toDomain
 import com.example.bootcampfinalproject.data.remote.paging.MoviePagingSource
+import com.example.bootcampfinalproject.domain.MovieCategory
 import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.domain.repository.TmdbRepository
 import com.example.bootcampfinalproject.util.ResponseState
@@ -22,7 +23,16 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getUpComingMovies(): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(pageSize = 1),
-            pagingSourceFactory = { MoviePagingSource(api) }
+            pagingSourceFactory = { MoviePagingSource(api, MovieCategory.UP_COMING) }
+        ).flow.map { pagingData ->
+            pagingData.map { it.toDomain() }
+        }
+    }
+
+    override fun getTopRatedMovies(): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(pageSize = 1),
+            pagingSourceFactory = { MoviePagingSource(api, MovieCategory.TOP_RATED) }
         ).flow.map { pagingData ->
             pagingData.map { it.toDomain() }
         }

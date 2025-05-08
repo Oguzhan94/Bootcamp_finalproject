@@ -1,5 +1,8 @@
 package com.example.bootcampfinalproject.presentation.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -7,6 +10,7 @@ import androidx.compose.material.icons.filled.Abc
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -14,10 +18,13 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,6 +34,7 @@ import com.example.bootcampfinalproject.presentation.authorization.login.LoginSc
 import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreen
 import com.example.bootcampfinalproject.presentation.detail.DetailScreen
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
+import com.example.bootcampfinalproject.presentation.theme.onSurfaceLight
 
 import kotlin.reflect.KClass
 
@@ -68,26 +76,29 @@ fun AppNavigation(startDestination: Screen) {
     Scaffold(
         topBar = {
             if (!isAuthScreen) {
-                CenterAlignedTopAppBar(
-                    title = {
-                        Text(
-                            text = title,
-                            style =  MaterialTheme.typography.titleMedium
-                        )
-                    },
-                    navigationIcon = {
-                        if (!isCurrentScreen(Screen.HomeScreen::class)) {
-                            IconButton(
-                                onClick = { navController.navigateUp() }
-                            ) {
-                                Icon(
-                                    Icons.AutoMirrored.Default.ArrowBack,
-                                    contentDescription = "Back"
-                                )
+                Column {
+                    CenterAlignedTopAppBar(
+                        title = {
+                            Text(
+                                text = "Movies",
+                                style = MaterialTheme.typography.displayMedium
+                            )
+                        },
+                        navigationIcon = {
+                            if (!isCurrentScreen(Screen.HomeScreen::class)) {
+                                IconButton(
+                                    onClick = { navController.navigateUp() }
+                                ) {
+                                    Icon(
+                                        Icons.AutoMirrored.Default.ArrowBack,
+                                        contentDescription = "Back"
+                                    )
+                                }
                             }
                         }
-                    }
-                )
+                    )
+                    HorizontalDivider(Modifier.fillMaxWidth(), thickness = 1.dp)
+                }
             }
         },
         bottomBar = {
@@ -110,14 +121,13 @@ fun AppNavigation(startDestination: Screen) {
                                         launchSingleTop = true
                                     }
                                 }
-                            }
-                            ,
+                            },
                             icon = {
                                 Icon(
                                     item.icon,
                                     contentDescription = item.title,
                                 )
-                                   },
+                            },
                             label = { Text(item.title) },
                         )
                     }

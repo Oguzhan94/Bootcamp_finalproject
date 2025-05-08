@@ -6,16 +6,24 @@ import androidx.paging.PagingState
 import com.example.bootcampfinalproject.data.remote.TmdbApi
 import com.example.bootcampfinalproject.data.remote.mapper.toDomain
 import com.example.bootcampfinalproject.data.remote.model.Result
+import com.example.bootcampfinalproject.domain.MovieCategory
 
 class MoviePagingSource(
     private val api: TmdbApi,
+    private val category: MovieCategory
 ) : PagingSource<Int, Result>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
             val currentPage = params.key ?: 1
-            val response = api.getUpComingMovies(page = currentPage)
-            Log.d("PagingSource", "Loaded ${response.results.size} items from page $currentPage")
+          val response = when(category){
+                MovieCategory.UP_COMING -> api.getUpComingMovies(page = currentPage)
+              MovieCategory.TOP_RATED -> {
+                  val topRated = api.getTopRatedMovies(page = currentPage)
+                  Log.d("PagingSource", "TopRated: ${topRated.results.size}")
+                  topRated
+              }
+            }
 
             LoadResult.Page(
                 data = response.results,
