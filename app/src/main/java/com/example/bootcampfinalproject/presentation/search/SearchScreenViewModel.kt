@@ -6,8 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bootcampfinalproject.domain.usecase.movies.GetSearchUseCase
+import com.example.bootcampfinalproject.presentation.SearchScreenUiState
 import com.example.bootcampfinalproject.util.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,22 +25,36 @@ class SearchScreenViewModel @Inject constructor(
 
     fun onSearchQueryChange(query: String) {
         searchQuery = query
-        searchMovie()
+        if (query.length >= 3){
+            searchMovie()
+        } else {
+            _uiState.value = SearchScreenUiState.Idle
+        }
     }
+
+    fun onClearQuery(){
+        searchQuery = ""
+        _uiState.value = SearchScreenUiState.Idle
+    }
+
+    private val _uiState = MutableStateFlow<SearchScreenUiState>(SearchScreenUiState.Idle)
+    val uiState: StateFlow<SearchScreenUiState> = _uiState.asStateFlow()
 
     private fun searchMovie() {
         viewModelScope.launch {
+            _uiState.value = SearchScreenUiState.Loading
             getSearchUseCase(searchQuery).collect {
                 when (it) {
                     is ResponseState.Success -> {
-                        it.data
+                        _uiState.value = SearchScreenUiState.Success(it.data)
                     }
 
                     is ResponseState.Error -> {
-                        it.message
+                        _uiState.value = SearchScreenUiState.Error(it.message)
                     }
 
                     ResponseState.Loading -> {
+                        _uiState.value = SearchScreenUiState.Loading
                     }
                 }
 

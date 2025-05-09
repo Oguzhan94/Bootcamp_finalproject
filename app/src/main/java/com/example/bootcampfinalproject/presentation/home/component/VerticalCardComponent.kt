@@ -1,7 +1,6 @@
 package com.example.bootcampfinalproject.presentation.home.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +26,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -35,7 +33,7 @@ import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
 
 @Composable
-fun HorizontalCard(movie: Movie) {
+fun VerticalCardComponent(movie: Movie) {
     Card(
         modifier = Modifier
             .width(130.dp)

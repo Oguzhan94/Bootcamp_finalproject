@@ -37,7 +37,7 @@ fun UpcomingComponent(
             items(upComingMovies.itemCount) { index ->
                 val movie = upComingMovies[index]
                 movie?.let {
-                    HorizontalCard(it)
+                    VerticalCardComponent(it)
                 }
             }
         }

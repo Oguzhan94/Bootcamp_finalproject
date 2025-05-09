@@ -30,7 +30,7 @@ import com.example.bootcampfinalproject.presentation.HomeUiState
 import com.example.bootcampfinalproject.presentation.home.component.HomeScreenErrorComponent
 import com.example.bootcampfinalproject.presentation.home.component.Loading
 import com.example.bootcampfinalproject.presentation.home.component.UpcomingComponent
-import com.example.bootcampfinalproject.presentation.home.component.VerticalCard
+import com.example.bootcampfinalproject.presentation.home.component.HorizontalCardComponent
 
 @Composable
 fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostState) {
@@ -103,7 +103,7 @@ fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostStat
                     items(topRatedMovies.itemCount) { index ->
                         val movie = topRatedMovies[index]
                         movie?.let {
-                            VerticalCard(it)
+                            HorizontalCardComponent(it)
                         }
                     }
                     item {

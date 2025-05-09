@@ -1,7 +1,6 @@
 package com.example.bootcampfinalproject.presentation.home.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,32 +27,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
-import kotlinx.coroutines.Job
 
 @Composable
-fun VerticalCard(movie: Movie) {
-//    val movie2 = Movie(
-//        title = "Movie 2 Movie 2 Movie 2Movie 2 Movie 2 Movie 2Movie 2 Movie 2 Movie 2Movie 2 Movie 2 M",
-//        releaseDate = "2023-02-01",
-//        adult = true,
-//        backdropPath = "/path/to/backdrop2.jpg",
-//        genreIds = listOf(35, 18),
-//        id = 2,
-//        originalLanguage = "en",
-//        originalTitle = "Original Movie 2",
-//        overview = "This is a brief overview of Movie 2.",
-//        popularity = 8.5,
-//        posterPath = "/path/to/poster2.jpg",
-//        video = true,
-//        voteAverage = 8.3,
-//        voteCount = 1500
-//    )
+fun HorizontalCardComponent(movie: Movie) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -76,8 +56,9 @@ fun VerticalCard(movie: Movie) {
                         .build(),
                     placeholder = painterResource(R.drawable.loading),
                     contentDescription = "",
-                    contentScale = ContentScale.Fit,
+                    contentScale = ContentScale.FillBounds,
                     modifier = Modifier
+                        .size(140.dp, 150.dp)
                         .clip(
                             RoundedCornerShape(
                                 topStart = 6.dp,
@@ -105,7 +86,7 @@ fun VerticalCard(movie: Movie) {
                 Row(
                     Modifier.fillMaxWidth(),
                 ) {
-                    movie.genreNames.forEach { it ->
+                    movie.genreNames.take(2).forEach { it ->
                         Surface(
                             shape = RoundedCornerShape(12.dp),
                         ) {
@@ -113,7 +94,8 @@ fun VerticalCard(movie: Movie) {
                                 text = it,
                                 maxLines = 1,
                                 overflow = TextOverflow.Clip,
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                modifier = Modifier
+                                    .padding(horizontal = 8.dp, vertical = 4.dp),
                                 fontWeight = FontWeight.SemiBold
                             )
                         }
@@ -138,28 +120,4 @@ fun VerticalCard(movie: Movie) {
             }
         }
     }
-
 }
-
-//@Preview
-//@Composable
-//fun CardPrev() {
-//    VerticalCard(
-//        Movie(
-//            title = "Movie 2",
-//            releaseDate = "2023-02-01",
-//            adult = true,
-//            backdropPath = "/path/to/backdrop2.jpg",
-//            genreIds = listOf(35, 18),
-//            id = 2,
-//            originalLanguage = "en",
-//            originalTitle = "Original Movie 2",
-//            overview = "This is a brief overview of Movie 2.",
-//            popularity = 8.5,
-//            posterPath = "/path/to/poster2.jpg",
-//            video = true,
-//            voteAverage = 8.3,
-//            voteCount = 1500
-//        )
-//    )
-//}
