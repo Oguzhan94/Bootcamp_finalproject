@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Abc
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -36,6 +37,7 @@ import com.example.bootcampfinalproject.presentation.authorization.register.Regi
 import com.example.bootcampfinalproject.presentation.detail.DetailScreen
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
 import com.example.bootcampfinalproject.R
+import com.example.bootcampfinalproject.presentation.search.SearchScreen
 
 import kotlin.reflect.KClass
 
@@ -53,7 +55,7 @@ fun AppNavigation(startDestination: Screen) {
 
     val items = listOf(
         BottomNavItem("Home", Icons.Default.Home, Screen.HomeScreen),
-        BottomNavItem("Detail", Icons.Default.Abc, Screen.DetailScreen)
+        BottomNavItem("Search", Icons.Default.Search, Screen.SearchScreen)
     )
 
     fun isCurrentScreen(screen: KClass<out Screen>): Boolean {
@@ -70,6 +72,7 @@ fun AppNavigation(startDestination: Screen) {
         isCurrentScreen(Screen.DetailScreen::class) -> "Detail"
         isCurrentScreen(Screen.LoginScreen::class) -> "Login"
         isCurrentScreen(Screen.RegisterScreen::class) -> "Register"
+        isCurrentScreen(Screen.SearchScreen::class) -> "Search"
         else -> ""
     }
 
@@ -147,6 +150,9 @@ fun AppNavigation(startDestination: Screen) {
             }
             composable<Screen.DetailScreen> {
                 DetailScreen()
+            }
+            composable<Screen.SearchScreen> {
+                SearchScreen(navController, snackBarHostState)
             }
         }
     }

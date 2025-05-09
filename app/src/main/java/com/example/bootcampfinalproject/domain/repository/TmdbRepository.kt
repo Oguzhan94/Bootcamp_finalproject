@@ -11,4 +11,5 @@ interface TmdbRepository{
      fun getUpComingMovies():  Flow<PagingData<Movie>>
      fun getTopRatedMovies():  Flow<PagingData<Movie>>
      suspend fun getMovieGenres(): ResponseState<List<Genre>>
+     fun getSearchMovies(query: String): Flow<ResponseState<List<Movie>>>
 }
