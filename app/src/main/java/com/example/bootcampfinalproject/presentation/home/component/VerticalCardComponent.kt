@@ -100,28 +100,4 @@ fun VerticalCardComponent(movie: Movie) {
         }
 
     }
-
 }
-
-//@Preview
-//@Composable
-//fun HorizontalCardPrev() {
-//    HorizontalCard(
-//        Movie(
-//            title = "Movie 2",
-//            releaseDate = "2023-02-01",
-//            adult = true,
-//            backdropPath = "/path/to/backdrop2.jpg",
-//            genreIds = listOf(35, 18),
-//            id = 2,
-//            originalLanguage = "en",
-//            originalTitle = "Original Movie 2",
-//            overview = "This is a brief overview of Movie 2.",
-//            popularity = 8.5,
-//            posterPath = "/path/to/poster2.jpg",
-//            video = true,
-//            voteAverage = 8.3,
-//            voteCount = 1500
-//        )
-//    )
-//}

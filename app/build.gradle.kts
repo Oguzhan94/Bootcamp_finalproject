@@ -88,5 +88,7 @@ dependencies {
     implementation(libs.paging.compose)
     //Coil
     implementation(libs.coil.compose)
+    //
+    implementation (libs.accompanist.swiperefresh)
 }
 

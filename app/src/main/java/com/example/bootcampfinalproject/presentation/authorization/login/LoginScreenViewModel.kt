@@ -4,7 +4,6 @@ import android.util.Patterns
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bootcampfinalproject.R
@@ -74,7 +73,7 @@ class LoginScreenViewModel @Inject constructor(
                 _uiState.value = AuthUiState.Loading
                 when (val result = loginUseCase(emailInput, passwordInput)) {
                     is ResponseState.Success -> {
-                        _uiState.value = AuthUiState.Success(result.data)
+                        _uiState.value = Success(result.data)
                     }
 
                     is ResponseState.Error -> {

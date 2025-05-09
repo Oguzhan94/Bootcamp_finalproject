@@ -1,6 +1,7 @@
 package com.example.bootcampfinalproject.di
 
 import com.example.bootcampfinalproject.data.remote.TmdbApi
+import com.example.bootcampfinalproject.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +18,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val TMDB_API_KEY = "ecd2d80170f1033b7b88b470612fa6ec"
 
     @Provides

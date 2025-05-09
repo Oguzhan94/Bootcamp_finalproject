@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,8 +39,7 @@ fun HorizontalCardComponent(movie: Movie) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp)
-            .clickable { },
+            .height(150.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
         Row(
@@ -47,27 +47,11 @@ fun HorizontalCardComponent(movie: Movie) {
                 .fillMaxWidth()
                 .padding(end = 5.dp),
         ) {
-
-                AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data("https://image.tmdb.org/t/p/original/${movie.posterPath}")
-                        .crossfade(true)
-                        .allowHardware(false)
-                        .build(),
-                    placeholder = painterResource(R.drawable.loading),
-                    contentDescription = "",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .size(140.dp, 150.dp)
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = 6.dp,
-                                topEnd = 6.dp,
-                                bottomStart = 0.dp,
-                                bottomEnd = 0.dp
-                            )
-                        ),
-                )
+            MoviePoster(
+                posterPath = movie.posterPath,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.size(140.dp, 150.dp)
+            )
 
             Column(
                 modifier = Modifier
@@ -82,42 +66,77 @@ fun HorizontalCardComponent(movie: Movie) {
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold
                 )
-                Spacer(Modifier.height(15.dp))
-                Row(
-                    Modifier.fillMaxWidth(),
-                ) {
-                    movie.genreNames.take(2).forEach { it ->
-                        Surface(
-                            shape = RoundedCornerShape(12.dp),
-                        ) {
-                            Text(
-                                text = it,
-                                maxLines = 1,
-                                overflow = TextOverflow.Clip,
-                                modifier = Modifier
-                                    .padding(horizontal = 8.dp, vertical = 4.dp),
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                        Spacer(Modifier.width(5.dp))
-                    }
-                }
 
                 Spacer(Modifier.height(15.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        modifier = Modifier.size(16.dp),
-                        imageVector = Icons.Default.Star,
-                        contentDescription = ""
-                    )
-                    Text(text = String.format("%.1f", movie.voteAverage))
-                }
 
+                GenreChips(genreNames = movie.genreNames.take(2))
+
+                Spacer(Modifier.height(15.dp))
+
+                RatingBar(rating = movie.voteAverage)
             }
         }
+    }
+}
+@Composable
+fun MoviePoster(
+    posterPath: String,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Crop,
+    cornerShape: RoundedCornerShape = RoundedCornerShape(
+        topStart = 6.dp,
+        topEnd = 6.dp,
+        bottomStart = 0.dp,
+        bottomEnd = 0.dp
+    )
+) {
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data("https://image.tmdb.org/t/p/original/$posterPath")
+            .crossfade(true)
+            .allowHardware(false)
+            .build(),
+        placeholder = painterResource(R.drawable.loading),
+        contentDescription = null,
+        contentScale = contentScale,
+        modifier = modifier.clip(cornerShape),
+    )
+}
+
+@Composable
+fun GenreChips(genreNames: List<String>) {
+    Row(Modifier.fillMaxWidth()) {
+        genreNames.forEach { genre ->
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+            ) {
+                Text(
+                    text = genre,
+                    maxLines = 1,
+                    overflow = TextOverflow.Clip,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+            Spacer(Modifier.width(5.dp))
+        }
+    }
+}
+
+@Composable
+fun RatingBar(rating: Double) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier.size(16.dp),
+            imageVector = Icons.Default.Star,
+            contentDescription = "",
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Spacer(Modifier.width(4.dp))
+        Text(text = String.format("%.1f", rating))
     }
 }

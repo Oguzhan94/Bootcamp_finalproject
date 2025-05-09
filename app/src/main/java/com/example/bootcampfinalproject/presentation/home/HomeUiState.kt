@@ -1,6 +1,4 @@
-package com.example.bootcampfinalproject.presentation
-
-import com.google.firebase.auth.FirebaseUser
+package com.example.bootcampfinalproject.presentation.home
 
 sealed interface HomeUiState {
     data object Idle : HomeUiState
