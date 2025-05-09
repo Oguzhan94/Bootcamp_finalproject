@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import com.example.bootcampfinalproject.R
 
 class FirebaseAuthImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
@@ -23,10 +24,10 @@ class FirebaseAuthImpl @Inject constructor(
             if (user != null){
                 ResponseState.Success(user)
             } else {
-                ResponseState.Error("User is null")
+                ResponseState.Error(R.string.unknown_error.toString())
             }
         } catch (e: Exception) {
-            ResponseState.Error(e.localizedMessage ?: "Giriş işlemi sırasında bir hata oluştu.")
+            ResponseState.Error(e.localizedMessage ?: R.string.an_error_occurred_during_the_login_process.toString())
         }
     }
 
@@ -40,10 +41,10 @@ class FirebaseAuthImpl @Inject constructor(
             if (user != null) {
                 ResponseState.Success(user)
             } else {
-                ResponseState.Error("Kullanıcı bilgisi alınamadı.")
+                ResponseState.Error(R.string.user_information_could_not_be_retrieved.toString())
             }
         } catch (e: Exception) {
-            ResponseState.Error(e.localizedMessage ?: "Giriş işlemi başarısız.")
+            ResponseState.Error(e.localizedMessage ?: R.string.login_failed.toString())
         }
     }
 
@@ -58,7 +59,7 @@ class FirebaseAuthImpl @Inject constructor(
             if (user != null) {
                 emit(ResponseState.Success(user))
             } else {
-                emit(ResponseState.Error("Kullanıcı bulunamadı"))
+                emit(ResponseState.Error(R.string.user_not_found.toString()))
             }
         }
     }

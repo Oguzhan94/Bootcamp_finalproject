@@ -1,5 +1,6 @@
 package com.example.bootcampfinalproject.data.remote
 
+import com.example.bootcampfinalproject.data.remote.model.Genres
 import com.example.bootcampfinalproject.data.remote.model.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,4 +18,10 @@ interface TmdbApi {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int,
     ): MovieResponse
+
+    @GET("genre/movie/list")
+    suspend fun getGenres(
+        @Query("language") language: String = "en-US",
+    ): Genres
+
 }

@@ -16,9 +16,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import com.example.bootcampfinalproject.R
 
 @Composable
 fun PasswordTextField(
@@ -38,7 +40,7 @@ fun PasswordTextField(
             IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
                 Icon(
                     imageVector = if (isPasswordVisible) Icons.Default.Visibility else Icons.Filled.VisibilityOff,
-                    contentDescription = if (isPasswordVisible) "Hide password" else "Show password"
+                    contentDescription = if (isPasswordVisible) stringResource(R.string.hide_password_text) else stringResource(R.string.show_password_text)
                 )
             }
         },

@@ -6,35 +6,62 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.bootcampfinalproject.data.remote.TmdbApi
 import com.example.bootcampfinalproject.data.remote.mapper.toDomain
+import com.example.bootcampfinalproject.data.remote.model.GenreDto
 import com.example.bootcampfinalproject.data.remote.paging.MoviePagingSource
 import com.example.bootcampfinalproject.domain.MovieCategory
+import com.example.bootcampfinalproject.domain.model.Genre
 import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.domain.repository.TmdbRepository
 import com.example.bootcampfinalproject.util.ResponseState
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val api: TmdbApi
 ) : TmdbRepository {
+    private var genresList: List<GenreDto> = emptyList()
+
     override fun getUpComingMovies(): Flow<PagingData<Movie>> {
         return Pager(
-            config = PagingConfig(pageSize = 1),
-            pagingSourceFactory = { MoviePagingSource(api, MovieCategory.UP_COMING) }
-        ).flow.map { pagingData ->
-            pagingData.map { it.toDomain() }
+            config = PagingConfig(
+                pageSize = 1,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MoviePagingSource(
+                    api,
+                    MovieCategory.UP_COMING
+                )
+            }).flow.map { pagingData ->
+            pagingData.map { it.toDomain(genresList) }
         }
     }
 
     override fun getTopRatedMovies(): Flow<PagingData<Movie>> {
         return Pager(
-            config = PagingConfig(pageSize = 1),
-            pagingSourceFactory = { MoviePagingSource(api, MovieCategory.TOP_RATED) }
-        ).flow.map { pagingData ->
-            pagingData.map { it.toDomain() }
+            config = PagingConfig(
+                pageSize = 1,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MoviePagingSource(
+                    api,
+                    MovieCategory.TOP_RATED
+                )
+            }).flow.map { pagingData ->
+            pagingData.map { it.toDomain(genresList) }
+        }
+    }
+
+    override suspend fun getMovieGenres(): ResponseState<List<Genre>> {
+        ResponseState.Loading
+        return try {
+            val response = api.getGenres()
+            genresList = response.genres
+            ResponseState.Success(response.genres.map { it.toDomain() })
+        } catch (e: Exception) {
+            ResponseState.Error(e.localizedMessage ?: "Bir hata oluştu")
         }
     }
 }

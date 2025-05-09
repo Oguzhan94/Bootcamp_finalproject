@@ -3,7 +3,7 @@ package com.example.bootcampfinalproject.domain.model
 data class Movie(
     val adult: Boolean,
     val backdropPath: String?,
-    val genreIds: List<Int>,
+    val genreNames: List<String>,
     val id: Int,
     val originalLanguage: String,
     val originalTitle: String,

@@ -1,6 +1,5 @@
 package com.example.bootcampfinalproject.presentation.navigation
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,13 +16,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
@@ -34,14 +35,12 @@ import com.example.bootcampfinalproject.presentation.authorization.login.LoginSc
 import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreen
 import com.example.bootcampfinalproject.presentation.detail.DetailScreen
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
-import com.example.bootcampfinalproject.presentation.theme.onSurfaceLight
+import com.example.bootcampfinalproject.R
 
 import kotlin.reflect.KClass
 
 data class BottomNavItem(
-    val title: String,
-    val icon: ImageVector,
-    val screen: Screen
+    val title: String, val icon: ImageVector, val screen: Screen
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,6 +49,7 @@ fun AppNavigation(startDestination: Screen) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val snackBarHostState = remember { SnackbarHostState() }
 
     val items = listOf(
         BottomNavItem("Home", Icons.Default.Home, Screen.HomeScreen),
@@ -73,81 +73,77 @@ fun AppNavigation(startDestination: Screen) {
         else -> ""
     }
 
-    Scaffold(
-        topBar = {
-            if (!isAuthScreen) {
-                Column {
-                    CenterAlignedTopAppBar(
-                        title = {
-                            Text(
-                                text = "Movies",
-                                style = MaterialTheme.typography.displayMedium
+    Scaffold(topBar = {
+        if (!isAuthScreen) {
+            Column {
+                CenterAlignedTopAppBar(title = {
+                    Text(
+                        text = stringResource(R.string.screen_title) , style = MaterialTheme.typography.displayMedium
+                    )
+                }, navigationIcon = {
+                    if (!isCurrentScreen(Screen.HomeScreen::class)) {
+                        IconButton(
+                            onClick = { navController.navigateUp() }) {
+                            Icon(
+                                Icons.AutoMirrored.Default.ArrowBack,
+                                contentDescription = stringResource(R.string.back_button_description)
                             )
-                        },
-                        navigationIcon = {
-                            if (!isCurrentScreen(Screen.HomeScreen::class)) {
-                                IconButton(
-                                    onClick = { navController.navigateUp() }
-                                ) {
-                                    Icon(
-                                        Icons.AutoMirrored.Default.ArrowBack,
-                                        contentDescription = "Back"
-                                    )
+                        }
+                    }
+                })
+                HorizontalDivider(Modifier.fillMaxWidth(), thickness = 1.dp)
+            }
+        }
+    }, bottomBar = {
+        if (!isAuthScreen) {
+            NavigationBar(
+            ) {
+                items.forEach { item ->
+                    NavigationBarItem(
+                        selected = currentDestination?.hierarchy?.any {
+                            it.route?.contains(item.screen::class.simpleName ?: "") == true
+                        } == true,
+                        onClick = {
+                            if (item.screen == Screen.HomeScreen) {
+                                navController.navigate(Screen.HomeScreen) {
+                                    popUpTo(0) { inclusive = true }
+                                    launchSingleTop = true
+                                }
+                            } else {
+                                navController.navigate(item.screen) {
+                                    launchSingleTop = true
                                 }
                             }
-                        }
+                        },
+                        icon = {
+                            Icon(
+                                item.icon,
+                                contentDescription = item.title,
+                            )
+                        },
+                        label = { Text(item.title) },
                     )
-                    HorizontalDivider(Modifier.fillMaxWidth(), thickness = 1.dp)
-                }
-            }
-        },
-        bottomBar = {
-            if (!isAuthScreen) {
-                NavigationBar(
-                ) {
-                    items.forEach { item ->
-                        NavigationBarItem(
-                            selected = currentDestination?.hierarchy?.any {
-                                it.route?.contains(item.screen::class.simpleName ?: "") == true
-                            } == true,
-                            onClick = {
-                                if (item.screen == Screen.HomeScreen) {
-                                    navController.navigate(Screen.HomeScreen) {
-                                        popUpTo(0) { inclusive = true }
-                                        launchSingleTop = true
-                                    }
-                                } else {
-                                    navController.navigate(item.screen) {
-                                        launchSingleTop = true
-                                    }
-                                }
-                            },
-                            icon = {
-                                Icon(
-                                    item.icon,
-                                    contentDescription = item.title,
-                                )
-                            },
-                            label = { Text(item.title) },
-                        )
-                    }
                 }
             }
         }
-    ) { innerPadding ->
+    }, snackbarHost = {
+        SnackbarHost(
+            hostState = snackBarHostState, modifier = Modifier.padding(bottom = 16.dp)
+        )
+    }) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = startDestination,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable<Screen.LoginScreen> {
-                LoginScreen(navController)
+                LoginScreen(navController, snackBarHostState)
             }
             composable<Screen.RegisterScreen> {
-                RegisterScreen(navController)
+                RegisterScreen(navController, snackBarHostState)
             }
             composable<Screen.HomeScreen> {
-                HomeScreen(navController)
+                HomeScreen(navController, snackBarHostState)
             }
             composable<Screen.DetailScreen> {
                 DetailScreen()

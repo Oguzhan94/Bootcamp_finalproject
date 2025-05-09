@@ -4,8 +4,10 @@ import android.util.Patterns
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.usecase.auth.CurrentUserUseCase
 import com.example.bootcampfinalproject.domain.usecase.auth.LoginUseCase
 import com.example.bootcampfinalproject.presentation.AuthUiState
@@ -30,22 +32,22 @@ class LoginScreenViewModel @Inject constructor(
         private set
     var passwordInput by mutableStateOf("")
         private set
-    var emailError by mutableStateOf<String?>(null)
+    var emailError by mutableStateOf<Int?>(null)
         private set
-    var passwordError by mutableStateOf<String?>(null)
+    var passwordError by mutableStateOf<Int?>(null)
         private set
     var isFormValid by mutableStateOf(false)
         private set
 
     fun onEmailChange(newEmail: String) {
         emailInput = newEmail
-        emailError = if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) null else "Geçerli bir email girin"
+        emailError = if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) null else R.string.email_error
         updateFormValidation()
     }
 
     fun onPasswordChange(newPassword: String) {
         passwordInput = newPassword
-        passwordError = if (newPassword.length >= 6) null else "Şifre en az 6 karakter olmalı"
+        passwordError = if (newPassword.length >= 6) null else R.string.password_error
         updateFormValidation()
     }
 

@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,16 +42,16 @@ import com.example.bootcampfinalproject.presentation.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.components.EmailTextField
 import com.example.bootcampfinalproject.presentation.authorization.components.PasswordTextField
 import com.example.bootcampfinalproject.presentation.navigation.Screen
-import com.example.bootcampfinalproject.presentation.theme.AppTheme
+import com.example.bootcampfinalproject.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    viewModel: RegisterScreenViewModel = hiltViewModel()
+    snackBarHostState: SnackbarHostState
 ) {
+    val viewModel = hiltViewModel<RegisterScreenViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(uiState) {
         when (uiState) {
@@ -59,7 +60,7 @@ fun RegisterScreen(
                     popUpTo(Screen.RegisterScreen) { inclusive = true }
                 }
                 snackBarHostState.showSnackbar(
-                    message = "Kayıt başarılı!", duration = SnackbarDuration.Short
+                    message = R.string.success_signup_text.toString(), duration = SnackbarDuration.Short
                 )
             }
 
@@ -87,7 +88,7 @@ fun RegisterScreen(
         ) {
             Spacer(Modifier.height(100.dp))
             Text(
-                text = "Register", style = MaterialTheme.typography.titleLarge
+                text = stringResource(R.string.register), style = MaterialTheme.typography.displayLarge
             )
             Spacer(Modifier.height(40.dp))
 
@@ -95,7 +96,7 @@ fun RegisterScreen(
                 value = viewModel.emailInput,
                 onValueChange = { viewModel.onEmailChange(it) },
                 isError = viewModel.emailError != null,
-                errorText = viewModel.emailError
+                errorText = viewModel.emailError?.let { stringResource(it) }
             )
 
             Spacer(Modifier.height(20.dp))
@@ -103,14 +104,14 @@ fun RegisterScreen(
             OutlinedTextField(
                 value = viewModel.fullNameInput,
                 onValueChange = { viewModel.onFullNameChange(it) },
-                label = { Text("Full Name") },
+                label = { Text(stringResource(R.string.full_name_text)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 isError = viewModel.fullNameError != null,
                 supportingText = {
                     if (viewModel.fullNameError != null) {
                         Text(
-                            text = viewModel.fullNameError!!,
+                            text = stringResource(R.string.full_name_text),
                             color = MaterialTheme.colorScheme.error,
                             style = MaterialTheme.typography.labelSmall
                         )
@@ -121,17 +122,17 @@ fun RegisterScreen(
             PasswordTextField(
                 value = viewModel.passwordInput,
                 onValueChange = { viewModel.onPasswordChange(it) },
-                label = "Password",
+                label = stringResource(R.string.password_text),
                 isError = viewModel.passwordError != null,
-                errorText = viewModel.passwordError
+                errorText = viewModel.passwordError?.let { stringResource(it) }
             )
             Spacer(Modifier.height(20.dp))
             PasswordTextField(
                 value = viewModel.confirmPasswordInput,
                 onValueChange = { viewModel.onConfirmPasswordChange(it) },
-                label = "Confirm Password",
+                label = stringResource(R.string.confirm_password_text),
                 isError = viewModel.confirmPasswordError != null,
-                errorText = viewModel.confirmPasswordError
+                errorText = viewModel.confirmPasswordError?.let { stringResource(it) }
             )
             Spacer(Modifier.height(30.dp))
             Button(
@@ -140,7 +141,7 @@ fun RegisterScreen(
                 shape = RoundedCornerShape(12.dp),
                 enabled = uiState != AuthUiState.Loading && viewModel.isFormValid
             ) {
-                Text(text = "Register")
+                Text(text = stringResource(R.string.register))
             }
             Spacer(Modifier.height(10.dp))
 
@@ -150,7 +151,7 @@ fun RegisterScreen(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Have an account?", style = MaterialTheme.typography.labelSmall
+                    text = stringResource(R.string.have_account_text), style = MaterialTheme.typography.labelLarge
                 )
                 TextButton(
                     onClick = {
@@ -159,7 +160,8 @@ fun RegisterScreen(
                         }
                     }, enabled = uiState != AuthUiState.Loading
                 ) {
-                    Text("Log in!")
+                    Text(stringResource(R.string.login_text),
+                        style = MaterialTheme.typography.labelLarge)
                 }
             }
         }
@@ -167,21 +169,5 @@ fun RegisterScreen(
         if (uiState is AuthUiState.Loading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
-
-        SnackbarHost(
-            hostState = snackBarHostState,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(16.dp)
-        )
-    }
-}
-
-@Preview()
-@Composable
-fun RegisterScreenPreview() {
-    AppTheme {
-        Surface(Modifier.fillMaxSize()) { RegisterScreen(rememberNavController()) }
-
     }
 }

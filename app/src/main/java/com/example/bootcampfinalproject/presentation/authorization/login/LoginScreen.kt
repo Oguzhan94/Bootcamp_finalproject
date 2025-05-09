@@ -13,39 +13,30 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.bootcampfinalproject.presentation.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.components.EmailTextField
 import com.example.bootcampfinalproject.presentation.authorization.components.PasswordTextField
 import com.example.bootcampfinalproject.presentation.navigation.Screen
-import com.example.bootcampfinalproject.presentation.theme.AppTheme
-
+import com.example.bootcampfinalproject.R
 
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(navController: NavController, snackBarHostState: SnackbarHostState) {
     val viewModel = hiltViewModel<LoginScreenViewModel>()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(uiState) {
         when (uiState) {
@@ -74,29 +65,27 @@ fun LoginScreen(navController: NavController){
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-        )
-        {
+        ) {
             Spacer(Modifier.height(200.dp))
             Text(
-                text = "Login",
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.titleLarge
+                text = stringResource(R.string.login_button_text),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                style = MaterialTheme.typography.displayLarge
             )
             Spacer(Modifier.height(70.dp))
             EmailTextField(
                 value = viewModel.emailInput,
-                onValueChange = {viewModel.onEmailChange(it)},
+                onValueChange = { viewModel.onEmailChange(it) },
                 isError = viewModel.emailError != null,
-                errorText = viewModel.emailError
+                errorText = viewModel.emailError?.let { stringResource(it) }
             )
             Spacer(Modifier.height(20.dp))
             PasswordTextField(
                 value = viewModel.passwordInput,
                 onValueChange = { viewModel.onPasswordChange(it) },
-                label = "Password",
+                label = stringResource(R.string.password_text),
                 isError = viewModel.passwordError != null,
-                errorText = viewModel.passwordError
+                errorText = viewModel.passwordError?.let { stringResource(it) }
             )
             Spacer(Modifier.height(30.dp))
             Button(
@@ -107,23 +96,24 @@ fun LoginScreen(navController: NavController){
                 shape = RoundedCornerShape(12.dp),
                 enabled = viewModel.isFormValid
             ) {
-                Text(text = "Login")
+                Text(text = stringResource(R.string.login_button_text))
             }
             Spacer(Modifier.height(10.dp))
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Don't have an account?",
-                    style = MaterialTheme.typography.labelSmall
+                    text = stringResource(R.string.dont_have_account_text), style = MaterialTheme.typography.labelLarge
                 )
                 TextButton(
                     onClick = { navController.navigate(Screen.RegisterScreen) },
                 ) {
-                    Text("Sign Up!")
+                    Text(
+                        text = stringResource(R.string.register_button_text),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                 }
             }
 
@@ -131,21 +121,5 @@ fun LoginScreen(navController: NavController){
         if (uiState is AuthUiState.Loading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
-
-        SnackbarHost(
-            hostState = snackBarHostState,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(16.dp)
-        )
-    }
-}
-
-@Preview()
-@Composable
-fun LoginScreenPreview() {
-    AppTheme {
-        Surface(Modifier.fillMaxSize()) {LoginScreen(rememberNavController())  }
-
     }
 }

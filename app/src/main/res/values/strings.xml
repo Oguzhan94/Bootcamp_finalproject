@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Bootcamp Final Project</string>
+    <string name="email_error">Please enter a valid email address.</string>
+    <string name="password_error">Password must be at least 6 characters long.</string>"
+    <string name="login_button_text">Login</string>
+    <string name="dont_have_account_text">Don\'t have an account?</string>
+    <string name="register_button_text">Sign Up!</string>
+    <string name="email">Email</string>
+    <string name="hide_password_text">Hide password</string>
+    <string name="show_password_text">Show password</string>
+    <string name="success_signup_text">Registration successful!</string>
+    <string name="register">Register</string>
+    <string name="full_name_text">Full Name</string>
+    <string name="password_text">Password</string>
+    <string name="confirm_password_text">Confirm Password</string>"
+    <string name="have_account_text">Have an account?</string>
+    <string name="login_text">Log in!</string>
+    <string name="null_user">User is null</string>
+    <string name="an_error_occurred_during_the_login_process">An error occurred during the login process.</string>
+    <string name="user_information_could_not_be_retrieved">User information could not be retrieved.</string>
+    <string name="login_failed">Login failed.</string>
+    <string name="user_not_found">User not found</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="back_button_description">Back</string>"
+    <string name="up_coming_movies">Up Coming Movies</string>
+    <string name="top_rated_movies">Top Rated Movies</string>"
+    <string name="screen_title">Movies</string>
+    <string name="password_do_not_match">Passwords do not match</string>
+    <string name="enter_your_name">Enter your name</string>
 </resources>

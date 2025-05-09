@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.example.bootcampfinalproject.R
 
 @HiltViewModel
 class RegisterScreenViewModel @Inject constructor(
@@ -35,38 +36,38 @@ class RegisterScreenViewModel @Inject constructor(
     var confirmPasswordInput by mutableStateOf("")
         private set
 
-    var emailError by mutableStateOf<String?>(null)
+    var emailError by mutableStateOf<Int?>(null)
         private set
-    var passwordError by mutableStateOf<String?>(null)
+    var passwordError by mutableStateOf<Int?>(null)
         private set
-    var confirmPasswordError by mutableStateOf<String?>(null)
+    var confirmPasswordError by mutableStateOf<Int?>(null)
         private set
-    var fullNameError by mutableStateOf<String?>(null)
+    var fullNameError by mutableStateOf<Int?>(null)
         private set
     var isFormValid by mutableStateOf(false)
         private set
 
     fun onEmailChange(newEmail: String) {
         emailInput = newEmail
-        emailError = if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) null else "Geçerli bir email girin"
+        emailError = if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) null else R.string.email_error
         updateFormValidation()
     }
 
     fun onPasswordChange(newPassword: String) {
         passwordInput = newPassword
-        passwordError = if (newPassword.length >= 6) null else "Şifre en az 6 karakter olmalı"
+        passwordError = if (newPassword.length >= 6) null else R.string.password_error
         updateFormValidation()
     }
 
     fun onConfirmPasswordChange(newPassword: String) {
         confirmPasswordInput = newPassword
-        confirmPasswordError = if (newPassword == passwordInput) null else "Şifreler eşleşmiyor"
+        confirmPasswordError = if (newPassword == passwordInput) null else R.string.password_do_not_match
         updateFormValidation()
     }
 
     fun onFullNameChange(newFullName: String) {
         fullNameInput = newFullName
-        fullNameError = if (newFullName.isNotBlank()) null else "Adınızı girin"
+        fullNameError = if (newFullName.isNotBlank()) null else R.string.enter_your_name
         updateFormValidation()
     }
     private fun updateFormValidation() {
