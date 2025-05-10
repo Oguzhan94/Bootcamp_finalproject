@@ -10,7 +10,6 @@ import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.domain.usecase.movies.GetGenresUseCase
 import com.example.bootcampfinalproject.domain.usecase.movies.GetTopRatedMoviesUseCase
 import com.example.bootcampfinalproject.domain.usecase.movies.GetUpcomingMoviesUseCase
-import com.example.bootcampfinalproject.presentation.home.HomeUiState
 import com.example.bootcampfinalproject.util.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,8 +1,8 @@
 package com.example.bootcampfinalproject.presentation.search
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,6 +22,8 @@ import androidx.navigation.NavController
 import com.example.bootcampfinalproject.presentation.SearchScreenUiState
 import com.example.bootcampfinalproject.presentation.home.component.HorizontalCardComponent
 import com.example.bootcampfinalproject.presentation.search.components.SearchBarComponent
+import com.example.bootcampfinalproject.presentation.search.components.LoadingState
+import com.example.bootcampfinalproject.presentation.search.components.SearchResultColumn
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,38 +33,34 @@ fun SearchScreen(navController: NavController, snackBarHostState: SnackbarHostSt
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(horizontal = 5.dp)
     ) {
-        Row(
+        SearchBarComponent(viewModel)
+        Spacer(Modifier.height(20.dp))
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 5.dp),
-            horizontalArrangement = Arrangement.Center
-        ){
-            SearchBarComponent(viewModel)
-        }
-        Spacer(Modifier.height(20.dp))
-        when(uiState.value){
-            is SearchScreenUiState.Error -> {
-
-            }
-            SearchScreenUiState.Idle -> {}
-            SearchScreenUiState.Loading -> {}
-            is SearchScreenUiState.Success -> {
-                val movie =(uiState.value as SearchScreenUiState.Success).data
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 10.dp),
-                    verticalArrangement = Arrangement.spacedBy(20.dp),
-                ) {
-                    items(movie.size) { index ->
-
-                        HorizontalCardComponent(movie[index])
+                .weight(1f)
+        ) {
+            when (uiState.value) {
+                is SearchScreenUiState.Error -> {
+                    val errorMessage = (uiState.value as SearchScreenUiState.Error).message
+                    LaunchedEffect(errorMessage) {
+                        snackBarHostState.showSnackbar(
+                            message = errorMessage,
+                            duration = SnackbarDuration.Short
+                        )
                     }
+                }
+
+                SearchScreenUiState.Idle -> {}
+                SearchScreenUiState.Loading -> {
+                    LoadingState()
+                }
+                is SearchScreenUiState.Success -> {
+                    SearchResultColumn(uiState.value)
                 }
             }
         }
-
-
     }
 }

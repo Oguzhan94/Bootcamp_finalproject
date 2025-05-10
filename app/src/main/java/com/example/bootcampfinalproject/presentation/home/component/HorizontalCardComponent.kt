@@ -1,6 +1,5 @@
 package com.example.bootcampfinalproject.presentation.home.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,7 +24,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -80,7 +78,7 @@ fun HorizontalCardComponent(movie: Movie) {
 }
 @Composable
 fun MoviePoster(
-    posterPath: String,
+    posterPath: String?,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
     cornerShape: RoundedCornerShape = RoundedCornerShape(
@@ -92,13 +90,14 @@ fun MoviePoster(
 ) {
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
-            .data("https://image.tmdb.org/t/p/original/$posterPath")
+            .data(if (posterPath != null) "https://image.tmdb.org/t/p/original/$posterPath" else null)
             .crossfade(true)
             .allowHardware(false)
             .build(),
         placeholder = painterResource(R.drawable.loading),
         contentDescription = null,
         contentScale = contentScale,
+        error = painterResource(R.drawable.error),
         modifier = modifier.clip(cornerShape),
     )
 }

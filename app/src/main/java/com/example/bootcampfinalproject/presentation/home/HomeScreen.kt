@@ -16,7 +16,6 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.bootcampfinalproject.domain.model.Movie
-import com.example.bootcampfinalproject.presentation.home.HomeUiState
 import com.example.bootcampfinalproject.presentation.home.component.HomeScreenContent
 import com.example.bootcampfinalproject.presentation.home.component.HomeScreenErrorComponent
 import com.example.bootcampfinalproject.presentation.home.component.Loading

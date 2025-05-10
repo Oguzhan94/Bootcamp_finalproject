@@ -19,6 +19,8 @@ import javax.inject.Inject
 class SearchScreenViewModel @Inject constructor(
     private val getSearchUseCase: GetSearchUseCase
 ) : ViewModel() {
+    private val _uiState = MutableStateFlow<SearchScreenUiState>(SearchScreenUiState.Idle)
+    val uiState: StateFlow<SearchScreenUiState> = _uiState.asStateFlow()
 
     var searchQuery by mutableStateOf("")
         private set
@@ -36,9 +38,6 @@ class SearchScreenViewModel @Inject constructor(
         searchQuery = ""
         _uiState.value = SearchScreenUiState.Idle
     }
-
-    private val _uiState = MutableStateFlow<SearchScreenUiState>(SearchScreenUiState.Idle)
-    val uiState: StateFlow<SearchScreenUiState> = _uiState.asStateFlow()
 
     private fun searchMovie() {
         viewModelScope.launch {
