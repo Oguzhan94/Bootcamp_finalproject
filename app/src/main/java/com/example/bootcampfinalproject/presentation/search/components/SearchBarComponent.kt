@@ -22,7 +22,7 @@ import com.example.bootcampfinalproject.presentation.search.SearchScreenViewMode
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBarComponent(viewModel: SearchScreenViewModel) {
+fun SearchBarComponent(viewModel: SearchScreenViewModel, searchQuery: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth(),
@@ -34,7 +34,7 @@ fun SearchBarComponent(viewModel: SearchScreenViewModel) {
                 .padding(horizontal = 10.dp),
             inputField = {
                 SearchBarDefaults.InputField(
-                    query = viewModel.searchQuery,
+                    query = searchQuery,
                     onQueryChange = { viewModel.onSearchQueryChange(it) },
                     onSearch = {},
                     expanded = false,
