@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,8 +38,7 @@ import com.example.bootcampfinalproject.util.extractDominantAndMutedColors
 
 @Composable
 fun DetailScreen(navController: NavController) {
-    var dominantColor by remember { mutableStateOf(Color.Gray) }
-    var mutedColor by remember { mutableStateOf(Color.Gray) }
+
     val viewModel = hiltViewModel<DetailScreenViewModel>()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -49,81 +47,20 @@ fun DetailScreen(navController: NavController) {
             .fillMaxSize()
     ) {
         when (val state = uiState.value) {
-            is DetailScreenUiState.Error -> { HomeScreenErrorComponent()}
+            is DetailScreenUiState.Error -> {
+                HomeScreenErrorComponent()
+            }
+
             DetailScreenUiState.Idle -> {}
             DetailScreenUiState.Loading -> {
                 Loading()
             }
+
             is DetailScreenUiState.Success -> {
                 val movie = state.data
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(dominantColor, mutedColor)
-                            )
-                        )
+                DetailScreenSuccessComponent(movie)
 
-                ) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                    ) {
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(300.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                AsyncImage(
-                                    model = ImageRequest.Builder(LocalContext.current)
-                                        .data("https://image.tmdb.org/t/p/original/${movie.poster_path}")
-                                        .crossfade(true)
-                                        .allowHardware(false)
-                                        .listener(
-                                            onSuccess = { _, result ->
-                                                result.drawable.toBitmap()
-                                                    .extractDominantAndMutedColors { colors ->
-                                                        dominantColor = colors.first
-                                                        mutedColor = colors.second
-                                                    }
-
-                                            }
-                                        )
-                                        .build(),
-                                    placeholder = painterResource(R.drawable.loading),
-                                    contentDescription = "",
-                                    contentScale = ContentScale.FillBounds,
-                                    error = painterResource(R.drawable.error),
-                                    modifier = Modifier
-                                        .size(150.dp, 200.dp)
-                                        .clip(
-                                            RoundedCornerShape(
-                                                6.dp
-                                            )
-                                        ),
-                                )
-                            }
-                        }
-                        item {
-                            Text(
-                                movie.title
-                            )
-                        }
-                        item {
-                            Row {
-                                Text(
-                                    movie.overview
-                                )
-                            }
-                        }
-                    }
-                }
             }
         }
     }
-
-
 }

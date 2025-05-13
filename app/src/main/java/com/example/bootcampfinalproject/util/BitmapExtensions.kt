@@ -13,7 +13,7 @@ fun Bitmap.extractDominantAndMutedColors(onColorsReady: (Pair<Color, Color>) -> 
     CoroutineScope(Dispatchers.Default).launch {
         val palette = Palette.from(this@extractDominantAndMutedColors).generate()
         val dominantColor = palette.getDominantColor(Color.Gray.toArgb())
-        val mutedColor = palette.getMutedColor(Color.Gray.toArgb())
+        val mutedColor = palette.getLightVibrantColor(Color.Gray.toArgb())
         withContext(Dispatchers.Main) {
             onColorsReady(Pair(Color(dominantColor), Color(mutedColor)))
         }
