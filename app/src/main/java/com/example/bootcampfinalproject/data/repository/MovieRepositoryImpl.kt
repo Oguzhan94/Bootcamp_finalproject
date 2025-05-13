@@ -11,6 +11,7 @@ import com.example.bootcampfinalproject.data.remote.paging.MoviePagingSource
 import com.example.bootcampfinalproject.domain.MovieCategory
 import com.example.bootcampfinalproject.domain.model.Genre
 import com.example.bootcampfinalproject.domain.model.Movie
+import com.example.bootcampfinalproject.domain.model.MovieDetail
 import com.example.bootcampfinalproject.domain.repository.TmdbRepository
 import com.example.bootcampfinalproject.util.ResponseState
 import kotlinx.coroutines.flow.Flow
@@ -73,6 +74,15 @@ class MovieRepositoryImpl @Inject constructor(
         }.catch {
             emit(ResponseState.Error(it.localizedMessage ?: "Bir hata oluştu"))
 
+        }
+    }
+
+    override suspend fun getMovieDetails(movieId: Int): ResponseState<MovieDetail> {
+        return try {
+            val response = api.getMovieDetails(movieId)
+            ResponseState.Success(response.toDomain())
+        } catch (e: Exception) {
+            ResponseState.Error(e.localizedMessage ?: "Bir hata oluştu")
         }
     }
 }

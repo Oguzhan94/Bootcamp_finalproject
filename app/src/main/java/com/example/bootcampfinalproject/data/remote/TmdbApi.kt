@@ -1,8 +1,10 @@
 package com.example.bootcampfinalproject.data.remote
 
 import com.example.bootcampfinalproject.data.remote.model.Genres
+import com.example.bootcampfinalproject.data.remote.model.MovieDetailsDto
 import com.example.bootcampfinalproject.data.remote.model.MovieResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TmdbApi {
@@ -31,5 +33,11 @@ interface TmdbApi {
         @Query("language") language: String = "en-US",
         @Query("include_adult") includeAdult: Boolean = false,
         ): MovieResponse
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: Int,
+        @Query("language") language: String = "en-US",
+    ): MovieDetailsDto
+
 
 }
