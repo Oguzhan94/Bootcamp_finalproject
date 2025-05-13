@@ -1,5 +1,6 @@
 package com.example.bootcampfinalproject.presentation.home.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -113,8 +114,9 @@ fun MoviePoster(
 fun GenreChips(genreNames: List<String>) {
     Row(Modifier.fillMaxWidth()) {
         genreNames.forEach { genre ->
-            Surface(
+            Card(
                 shape = RoundedCornerShape(12.dp),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurfaceVariant)
             ) {
                 Text(
                     text = genre,
