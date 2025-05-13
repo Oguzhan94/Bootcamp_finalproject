@@ -13,13 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
 
 @Composable
 fun UpcomingComponent(
-    upComingMovies: LazyPagingItems<Movie>
+    upComingMovies: LazyPagingItems<Movie>,
+    navController: NavController
 ){
     Column {
         Spacer(Modifier.height(10.dp))
@@ -37,7 +39,7 @@ fun UpcomingComponent(
             items(upComingMovies.itemCount) { index ->
                 val movie = upComingMovies[index]
                 movie?.let {
-                    VerticalCardComponent(it)
+                    VerticalCardComponent(it, navController)
                 }
             }
         }

@@ -31,12 +31,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreen
 import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreen
 import com.example.bootcampfinalproject.presentation.detail.DetailScreen
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
 import com.example.bootcampfinalproject.R
+import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.presentation.search.SearchScreen
+import com.google.gson.Gson
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 import kotlin.reflect.KClass
 
@@ -145,13 +151,30 @@ fun AppNavigation(startDestination: Screen) {
                 RegisterScreen(navController, snackBarHostState)
             }
             composable<Screen.HomeScreen> {
-                HomeScreen(navController, snackBarHostState)
+                HomeScreen(navController, snackBarHostState, onNavigateToDetail = { movie ->
+//                    val movieJson = Gson().toJson(movie)
+//                    val encodedMovieJson = URLEncoder.encode(movieJson, StandardCharsets.UTF_8.name())
+//                    navController.navigate("${Screen.DETAIL_SCREEN_ROUTE}/$encodedMovieJson")
+                    navController.navigate(Screen.DetailScreen(movie))
+                })
             }
-            composable<Screen.DetailScreen> {
-                DetailScreen()
+//            composable("${Screen.DETAIL_SCREEN_ROUTE}/{movieJson}") { backStackEntry ->
+//                val encodedMovieJson = backStackEntry.arguments?.getString("movieJson")
+//                val movieJson = encodedMovieJson?.let {
+//                    URLDecoder.decode(it, StandardCharsets.UTF_8.name())
+//                }
+//                movieJson?.let {
+//                    val movie = Gson().fromJson(it, Movie::class.java)
+//                    DetailScreen(movie = movie, navController)
+//                }
+//            }
+            composable<Screen.DetailScreen> { it ->
+                val route: Screen.DetailScreen = it.toRoute()
+                DetailScreen(navController)
             }
             composable<Screen.SearchScreen> {
-                SearchScreen(navController, snackBarHostState)
+                SearchScreen(navController, snackBarHostState, onNavigateToDetail = {movie ->
+                    navController.navigate(Screen.DetailScreen(movie))})
             }
         }
     }

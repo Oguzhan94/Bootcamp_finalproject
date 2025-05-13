@@ -1,5 +1,10 @@
 package com.example.bootcampfinalproject.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.serialization.Serializable
+@Serializable
+@Parcelize
 data class Movie(
     val adult: Boolean,
     val backdropPath: String?,
@@ -15,4 +20,4 @@ data class Movie(
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int
-)
+): Parcelable

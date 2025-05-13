@@ -27,18 +27,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
+import com.example.bootcampfinalproject.presentation.navigation.Screen
 
 @Composable
-fun VerticalCardComponent(movie: Movie) {
+fun VerticalCardComponent(movie: Movie, navController: NavController) {
     Card(
         modifier = Modifier
             .width(130.dp)
             .height(250.dp)
-            .clickable { },
+            .clickable {
+            },
         shape = RoundedCornerShape(8.dp)
     ) {
         AsyncImage(
@@ -50,6 +53,7 @@ fun VerticalCardComponent(movie: Movie) {
             placeholder = painterResource(R.drawable.loading),
             contentDescription = "",
             contentScale = ContentScale.Crop,
+            error = painterResource(R.drawable.error),
             modifier = Modifier
                 .size(130.dp, 140.dp)
                 .clip(

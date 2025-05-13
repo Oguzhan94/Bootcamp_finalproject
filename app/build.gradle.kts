@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinx.serialization.plugin)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -90,5 +91,7 @@ dependencies {
     implementation(libs.coil.compose)
     //
     implementation (libs.accompanist.swiperefresh)
+    //
+    implementation (libs.androidx.palette.ktx)
 }
 

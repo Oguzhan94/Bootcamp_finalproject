@@ -1,5 +1,6 @@
 package com.example.bootcampfinalproject.presentation.home.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,17 +28,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
+import com.example.bootcampfinalproject.presentation.navigation.Screen
 
 @Composable
-fun HorizontalCardComponent(movie: Movie) {
+fun HorizontalCardComponent(movie: Movie, navController: NavController,onNavigateToDetail: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp),
+            .height(150.dp)
+            .clickable{
+                onNavigateToDetail(movie.id)
+//                navController.navigate(Screen.DetailScreen(movie))
+            },
         shape = RoundedCornerShape(8.dp)
     ) {
         Row(
@@ -90,7 +97,7 @@ fun MoviePoster(
 ) {
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
-            .data(if (posterPath != null) "https://image.tmdb.org/t/p/original/$posterPath" else null)
+            .data("https://image.tmdb.org/t/p/original/$posterPath")
             .crossfade(true)
             .allowHardware(false)
             .build(),

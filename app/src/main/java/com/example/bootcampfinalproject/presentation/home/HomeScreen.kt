@@ -23,7 +23,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
-fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostState) {
+fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostState, onNavigateToDetail: (Int) -> Unit) {
     val viewModel = hiltViewModel<HomeScreenViewModel>()
     val upComingMovies: LazyPagingItems<Movie> = viewModel.upComingMovies.collectAsLazyPagingItems()
     val topRatedMovies: LazyPagingItems<Movie> = viewModel.topRatedMovies.collectAsLazyPagingItems()
@@ -90,7 +90,7 @@ fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostStat
                 }
 
                 else -> {
-                    HomeScreenContent(upComingMovies, topRatedMovies)
+                    HomeScreenContent(upComingMovies, topRatedMovies, navController, onNavigateToDetail)
                 }
             }
         }

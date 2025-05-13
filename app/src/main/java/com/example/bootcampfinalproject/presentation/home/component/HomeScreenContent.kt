@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
@@ -20,6 +21,8 @@ import com.example.bootcampfinalproject.domain.model.Movie
 fun HomeScreenContent(
     upComingMovies: LazyPagingItems<Movie>,
     topRatedMovies: LazyPagingItems<Movie>,
+    navController: NavController,
+    onNavigateToDetail: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -28,6 +31,7 @@ fun HomeScreenContent(
         item {
             UpcomingComponent(
                 upComingMovies = upComingMovies,
+                navController
             )
         }
 
@@ -47,6 +51,8 @@ fun HomeScreenContent(
             movie?.let {
                 HorizontalCardComponent(
                     movie = it,
+                    navController,
+                    onNavigateToDetail
                 )
             }
         }
