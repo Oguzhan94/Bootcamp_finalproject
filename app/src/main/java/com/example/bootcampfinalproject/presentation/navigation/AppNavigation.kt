@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,18 +34,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreen
 import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreen
+import com.example.bootcampfinalproject.presentation.bookmark.BookmarkScreen
 import com.example.bootcampfinalproject.presentation.detail.DetailScreen
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
-import com.example.bootcampfinalproject.R
-import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.presentation.search.SearchScreen
-import com.google.gson.Gson
-import java.net.URLDecoder
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
-
 import kotlin.reflect.KClass
 
 data class BottomNavItem(
@@ -60,7 +57,8 @@ fun AppNavigation(startDestination: Screen) {
 
     val items = listOf(
         BottomNavItem("Home", Icons.Default.Home, Screen.HomeScreen),
-        BottomNavItem("Search", Icons.Default.Search, Screen.SearchScreen)
+        BottomNavItem("Search", Icons.Default.Search, Screen.SearchScreen),
+        BottomNavItem("Bookmark", Icons.AutoMirrored.Filled.LibraryBooks, Screen.BookmarkScreen)
     )
 
     fun isCurrentScreen(screen: KClass<out Screen>): Boolean {
@@ -86,7 +84,8 @@ fun AppNavigation(startDestination: Screen) {
             Column {
                 CenterAlignedTopAppBar(title = {
                     Text(
-                        text = stringResource(R.string.screen_title) , style = MaterialTheme.typography.displayMedium
+                        text = stringResource(R.string.screen_title),
+                        style = MaterialTheme.typography.displayMedium
                     )
                 }, navigationIcon = {
                     if (!isCurrentScreen(Screen.HomeScreen::class)) {
@@ -173,8 +172,12 @@ fun AppNavigation(startDestination: Screen) {
                 DetailScreen(navController)
             }
             composable<Screen.SearchScreen> {
-                SearchScreen(navController, snackBarHostState, onNavigateToDetail = {movie ->
-                    navController.navigate(Screen.DetailScreen(movie))})
+                SearchScreen(navController, snackBarHostState, onNavigateToDetail = { movie ->
+                    navController.navigate(Screen.DetailScreen(movie))
+                })
+            }
+            composable<Screen.BookmarkScreen> {
+                BookmarkScreen()
             }
         }
     }

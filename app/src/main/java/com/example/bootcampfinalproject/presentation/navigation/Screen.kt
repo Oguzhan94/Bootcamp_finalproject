@@ -16,6 +16,8 @@ sealed interface Screen{
     data class DetailScreen(val movieId: Int) : Screen
     @Serializable
     data object SearchScreen : Screen
+    @Serializable
+    data object BookmarkScreen : Screen
 
     companion object {
         const val DETAIL_SCREEN_ROUTE = "detail_screen"
