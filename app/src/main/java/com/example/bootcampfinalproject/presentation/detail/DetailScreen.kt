@@ -58,7 +58,7 @@ fun DetailScreen(navController: NavController) {
 
             is DetailScreenUiState.Success -> {
                 val movie = state.data
-                DetailScreenSuccessComponent(movie)
+                DetailScreenSuccessComponent(movie, viewModel)
 
             }
         }

@@ -31,7 +31,7 @@ import com.example.bootcampfinalproject.presentation.detail.component.MovieChipC
 import com.example.bootcampfinalproject.util.formatWithSuffix
 
 @Composable
-fun DetailScreenSuccessComponent(movie: MovieDetail) {
+fun DetailScreenSuccessComponent(movie: MovieDetail, viewModel: DetailScreenViewModel) {
     var dominantColor = remember { mutableStateOf(Color.Gray) }
     var mutedColor = remember { mutableStateOf(Color.Gray) }
 
@@ -45,7 +45,7 @@ fun DetailScreenSuccessComponent(movie: MovieDetail) {
             )
     ) {
         item {
-            DetailScreenHeader(movie, dominantColor, mutedColor)
+            DetailScreenHeader(movie, dominantColor, mutedColor, viewModel)
         }
         item {
             Row(
