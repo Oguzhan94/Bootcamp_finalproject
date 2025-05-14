@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.ktx)
+    ksp(libs.room.compiler)
     //Retrofit
     implementation (libs.retrofit)
     implementation (libs.gson)
@@ -89,9 +90,9 @@ dependencies {
     implementation(libs.paging.compose)
     //Coil
     implementation(libs.coil.compose)
-    //
+    //SwipeRefresh
     implementation (libs.accompanist.swiperefresh)
-    //
+    //Palette
     implementation (libs.androidx.palette.ktx)
 }
 
