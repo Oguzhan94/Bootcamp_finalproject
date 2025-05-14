@@ -29,6 +29,7 @@ import com.example.bootcampfinalproject.domain.model.MovieDetail
 import com.example.bootcampfinalproject.presentation.detail.component.DetailScreenHeader
 import com.example.bootcampfinalproject.presentation.detail.component.MovieChipComponent
 import com.example.bootcampfinalproject.util.formatWithSuffix
+import java.util.Locale
 
 @Composable
 fun DetailScreenSuccessComponent(movie: MovieDetail, viewModel: DetailScreenViewModel) {
@@ -58,7 +59,7 @@ fun DetailScreenSuccessComponent(movie: MovieDetail, viewModel: DetailScreenView
             ) {
                 MovieChipComponent(
                     icon = Icons.Default.Star,
-                    text = String.format("%.1f", movie.vote_average)
+                    text = String.format(Locale.US,"%.1f", movie.vote_average)
                 )
                 MovieChipComponent(
                     icon = Icons.Default.DateRange,

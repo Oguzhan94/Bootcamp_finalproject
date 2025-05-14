@@ -1,13 +1,8 @@
 package com.example.bootcampfinalproject.presentation.detail
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.PrimaryKey
-import com.example.bootcampfinalproject.data.local.BookmarkEntity
 import com.example.bootcampfinalproject.domain.Bookmark
 import com.example.bootcampfinalproject.domain.model.MovieDetail
 import com.example.bootcampfinalproject.domain.usecase.auth.CurrentUserUseCase
@@ -15,14 +10,15 @@ import com.example.bootcampfinalproject.domain.usecase.bookmark.DeleteBookmarkUs
 import com.example.bootcampfinalproject.domain.usecase.bookmark.InsertBookmarkUseCase
 import com.example.bootcampfinalproject.domain.usecase.bookmark.IsBookmarkedUseCase
 import com.example.bootcampfinalproject.domain.usecase.movies.GetMovieDetailsUseCase
-import com.example.bootcampfinalproject.presentation.AuthUiState.Success
 import com.example.bootcampfinalproject.util.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
+
 @HiltViewModel
 class DetailScreenViewModel @Inject constructor(
     private val getMovieDetailUseCase: GetMovieDetailsUseCase,
@@ -101,7 +97,7 @@ class DetailScreenViewModel @Inject constructor(
             title = movie.title,
             posterPath = movie.poster_path,
             releaseDate = movie.release_date,
-            averageVote = String.format("%.1f", movie.vote_average)
+            averageVote = String.format(Locale.US,"%.1f", movie.vote_average)
         )
 
         viewModelScope.launch {
@@ -109,9 +105,11 @@ class DetailScreenViewModel @Inject constructor(
                 is ResponseState.Error -> {
                     _uiState.value = DetailScreenUiState.Error(result.message)
                 }
+
                 is ResponseState.Success -> {
                     checkIfBookmarked()
                 }
+
                 else -> Unit
             }
         }
@@ -127,17 +125,19 @@ class DetailScreenViewModel @Inject constructor(
             title = movie.title,
             posterPath = movie.poster_path,
             releaseDate = movie.release_date,
-            averageVote = String.format("%.1f", movie.vote_average)
+            averageVote = String.format(Locale.US,"%.1f", movie.vote_average)
         )
 
         viewModelScope.launch {
-            when(val result = deleteBookmarkUseCase(bookmark)){
+            when (val result = deleteBookmarkUseCase(bookmark)) {
                 is ResponseState.Error -> {
                     _uiState.value = DetailScreenUiState.Error(result.message)
                 }
+
                 is ResponseState.Success -> {
                     checkIfBookmarked()
                 }
+
                 else -> Unit
             }
         }
@@ -152,6 +152,7 @@ class DetailScreenViewModel @Inject constructor(
                 is ResponseState.Error -> {
                     _uiState.value = DetailScreenUiState.Error(result.message)
                 }
+
                 is ResponseState.Success -> {
                     _isBookmarked.value = result.data
                 }

@@ -1,7 +1,6 @@
 package com.example.bootcampfinalproject.data.repository
 
 import com.example.bootcampfinalproject.data.local.BookmarkDao
-import com.example.bootcampfinalproject.data.local.BookmarkEntity
 import com.example.bootcampfinalproject.data.local.mapper.toDomain
 import com.example.bootcampfinalproject.data.local.mapper.toEntity
 import com.example.bootcampfinalproject.domain.Bookmark
@@ -11,7 +10,7 @@ import javax.inject.Inject
 
 class BookmarkRepositoryImpl @Inject constructor(
     private val bookmarkDao: BookmarkDao
-) : BookmarkRepository{
+) : BookmarkRepository {
 
     override suspend fun getBookmarks(userId: String): ResponseState<List<Bookmark>> {
         return try {

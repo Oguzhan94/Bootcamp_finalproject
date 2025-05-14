@@ -1,6 +1,5 @@
 package com.example.bootcampfinalproject.domain.repository
 
-import com.example.bootcampfinalproject.data.local.BookmarkEntity
 import com.example.bootcampfinalproject.domain.Bookmark
 import com.example.bootcampfinalproject.util.ResponseState
 
