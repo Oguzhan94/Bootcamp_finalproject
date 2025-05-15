@@ -176,7 +176,9 @@ fun AppNavigation(startDestination: Screen) {
                 })
             }
             composable<Screen.BookmarkScreen> {
-                BookmarkScreen()
+                BookmarkScreen(navController){
+                    navController.navigate(Screen.DetailScreen(it))
+                }
             }
         }
     }
