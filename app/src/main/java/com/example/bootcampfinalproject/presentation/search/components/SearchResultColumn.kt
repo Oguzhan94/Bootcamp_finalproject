@@ -24,7 +24,7 @@ fun SearchResultColumn(uiState: SearchScreenUiState, navController: NavControlle
         items(movie.size) { index ->
 
             HorizontalCardComponent(
-                movie[index], navController,
+                movie[index],
                 onNavigateToDetail = onNavigateToDetail
             )
         }

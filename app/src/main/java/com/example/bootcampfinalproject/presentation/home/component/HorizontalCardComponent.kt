@@ -37,14 +37,13 @@ import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.presentation.navigation.Screen
 
 @Composable
-fun HorizontalCardComponent(movie: Movie, navController: NavController,onNavigateToDetail: (Int) -> Unit) {
+fun HorizontalCardComponent(movie: Movie,onNavigateToDetail: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
             .clickable{
                 onNavigateToDetail(movie.id)
-//                navController.navigate(Screen.DetailScreen(movie))
             },
         shape = RoundedCornerShape(8.dp)
     ) {

@@ -21,7 +21,7 @@ import com.example.bootcampfinalproject.domain.model.Movie
 @Composable
 fun UpcomingComponent(
     upComingMovies: LazyPagingItems<Movie>,
-    navController: NavController
+    onNavigateToDetail: (Int) -> Unit
 ){
     Column {
         Spacer(Modifier.height(10.dp))
@@ -39,7 +39,7 @@ fun UpcomingComponent(
             items(upComingMovies.itemCount) { index ->
                 val movie = upComingMovies[index]
                 movie?.let {
-                    VerticalCardComponent(it, navController)
+                    VerticalCardComponent(it, onNavigateToDetail)
                 }
             }
         }

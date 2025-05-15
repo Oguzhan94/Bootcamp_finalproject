@@ -31,7 +31,7 @@ fun HomeScreenContent(
         item {
             UpcomingComponent(
                 upComingMovies = upComingMovies,
-                navController
+                onNavigateToDetail
             )
         }
 
@@ -51,7 +51,6 @@ fun HomeScreenContent(
             movie?.let {
                 HorizontalCardComponent(
                     movie = it,
-                    navController,
                     onNavigateToDetail
                 )
             }

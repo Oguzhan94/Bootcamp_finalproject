@@ -35,12 +35,13 @@ import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.presentation.navigation.Screen
 
 @Composable
-fun VerticalCardComponent(movie: Movie, navController: NavController) {
+fun VerticalCardComponent(movie: Movie, onNavigateToDetail: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .width(130.dp)
             .height(250.dp)
             .clickable {
+                onNavigateToDetail(movie.id)
             },
         shape = RoundedCornerShape(8.dp)
     ) {
