@@ -87,7 +87,7 @@ fun AppNavigation(startDestination: Screen) {
                         style = MaterialTheme.typography.displayMedium
                     )
                 }, navigationIcon = {
-                    if (!isCurrentScreen(Screen.HomeScreen::class)) {
+                    if (isCurrentScreen(Screen.DetailScreen::class)) {
                         IconButton(
                             onClick = { navController.navigateUp() }) {
                             Icon(
