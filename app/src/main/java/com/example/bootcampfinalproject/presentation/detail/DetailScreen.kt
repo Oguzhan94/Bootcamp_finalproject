@@ -6,12 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import com.example.bootcampfinalproject.presentation.home.component.HomeScreenErrorComponent
-import com.example.bootcampfinalproject.presentation.home.component.Loading
+import com.example.bootcampfinalproject.presentation.component.ErrorComponent
+import com.example.bootcampfinalproject.presentation.component.Loading
 
 @Composable
-fun DetailScreen(navController: NavController) {
+fun DetailScreen() {
 
     val viewModel = hiltViewModel<DetailScreenViewModel>()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -22,10 +21,9 @@ fun DetailScreen(navController: NavController) {
     ) {
         when (val state = uiState.value) {
             is DetailScreenUiState.Error -> {
-                HomeScreenErrorComponent()
+                ErrorComponent()
             }
 
-            DetailScreenUiState.Idle -> {}
             DetailScreenUiState.Loading -> {
                 Loading()
             }
@@ -35,6 +33,8 @@ fun DetailScreen(navController: NavController) {
                 DetailScreenSuccessComponent(movie, viewModel)
 
             }
+
+            else -> Unit
         }
     }
 }

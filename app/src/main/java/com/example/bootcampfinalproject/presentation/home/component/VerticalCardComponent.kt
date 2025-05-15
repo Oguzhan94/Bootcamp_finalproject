@@ -27,12 +27,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
-import com.example.bootcampfinalproject.presentation.navigation.Screen
+import java.util.Locale
 
 @Composable
 fun VerticalCardComponent(movie: Movie, onNavigateToDetail: (Int) -> Unit) {
@@ -83,7 +82,7 @@ fun VerticalCardComponent(movie: Movie, onNavigateToDetail: (Int) -> Unit) {
                     imageVector = Icons.Default.Star,
                     contentDescription = ""
                 )
-                Text(text = String.format("%.1f", movie.voteAverage))
+                Text(text = String.format(Locale("en"),"%.1f", movie.voteAverage))
             }
             Spacer(Modifier.height(5.dp))
             Text(

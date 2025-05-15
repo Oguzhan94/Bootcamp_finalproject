@@ -2,7 +2,6 @@ package com.example.bootcampfinalproject.presentation.bookmark
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bootcampfinalproject.domain.Bookmark
 import com.example.bootcampfinalproject.domain.usecase.auth.CurrentUserUseCase
 import com.example.bootcampfinalproject.domain.usecase.bookmark.GetBookmarksUseCase
 import com.example.bootcampfinalproject.util.ResponseState
@@ -18,13 +17,10 @@ import javax.inject.Inject
 class BookmarkScreenViewModel @Inject constructor(
     private val getBookmarksUseCase: GetBookmarksUseCase,
     private val getCurrentUserUseCase: CurrentUserUseCase
-) : ViewModel(){
+) : ViewModel() {
+
     private val _uiState = MutableStateFlow<BookmarkScreenUiState>(BookmarkScreenUiState.Idle)
     val uiState: StateFlow<BookmarkScreenUiState> = _uiState.asStateFlow()
-
-
-    private val _bookmarks = MutableStateFlow<List<Bookmark>>(emptyList())
-    val bookmarks: StateFlow<List<Bookmark>> = _bookmarks.asStateFlow()
 
     init {
         observeCurrentUser()
@@ -47,9 +43,11 @@ class BookmarkScreenViewModel @Inject constructor(
                 is ResponseState.Success -> {
                     _uiState.value = BookmarkScreenUiState.Success(result.data)
                 }
+
                 is ResponseState.Error -> {
                     _uiState.value = BookmarkScreenUiState.Error(result.message)
                 }
+
                 is ResponseState.Loading -> {
                     _uiState.value = BookmarkScreenUiState.Loading
                 }

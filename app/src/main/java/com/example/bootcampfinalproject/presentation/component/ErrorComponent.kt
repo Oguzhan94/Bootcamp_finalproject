@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.home.component
+package com.example.bootcampfinalproject.presentation.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.bootcampfinalproject.R
 
 @Composable
-fun HomeScreenErrorComponent() {
+fun ErrorComponent() {
     Column(
         modifier = Modifier
             .fillMaxSize()

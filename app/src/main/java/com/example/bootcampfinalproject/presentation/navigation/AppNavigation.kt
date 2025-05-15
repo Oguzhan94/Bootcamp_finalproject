@@ -32,7 +32,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreen
 import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreen
@@ -69,15 +68,6 @@ fun AppNavigation(startDestination: Screen) {
     val isAuthScreen =
         isCurrentScreen(Screen.LoginScreen::class) || isCurrentScreen(Screen.RegisterScreen::class)
 
-    val title = when {
-        isCurrentScreen(Screen.HomeScreen::class) -> "Home"
-        isCurrentScreen(Screen.DetailScreen::class) -> "Detail"
-        isCurrentScreen(Screen.LoginScreen::class) -> "Login"
-        isCurrentScreen(Screen.RegisterScreen::class) -> "Register"
-        isCurrentScreen(Screen.SearchScreen::class) -> "Search"
-        else -> ""
-    }
-
     Scaffold(topBar = {
         if (!isAuthScreen) {
             Column {
@@ -102,8 +92,7 @@ fun AppNavigation(startDestination: Screen) {
         }
     }, bottomBar = {
         if (!isAuthScreen) {
-            NavigationBar(
-            ) {
+            NavigationBar {
                 items.forEach { item ->
                     NavigationBarItem(
                         selected = currentDestination?.hierarchy?.any {
@@ -149,34 +138,21 @@ fun AppNavigation(startDestination: Screen) {
                 RegisterScreen(navController, snackBarHostState)
             }
             composable<Screen.HomeScreen> {
-                HomeScreen(navController, snackBarHostState, onNavigateToDetail = { movie ->
-//                    val movieJson = Gson().toJson(movie)
-//                    val encodedMovieJson = URLEncoder.encode(movieJson, StandardCharsets.UTF_8.name())
-//                    navController.navigate("${Screen.DETAIL_SCREEN_ROUTE}/$encodedMovieJson")
+                HomeScreen(snackBarHostState, onNavigateToDetail = { movie ->
                     navController.navigate(Screen.DetailScreen(movie))
                 })
             }
-//            composable("${Screen.DETAIL_SCREEN_ROUTE}/{movieJson}") { backStackEntry ->
-//                val encodedMovieJson = backStackEntry.arguments?.getString("movieJson")
-//                val movieJson = encodedMovieJson?.let {
-//                    URLDecoder.decode(it, StandardCharsets.UTF_8.name())
-//                }
-//                movieJson?.let {
-//                    val movie = Gson().fromJson(it, Movie::class.java)
-//                    DetailScreen(movie = movie, navController)
-//                }
-//            }
+
             composable<Screen.DetailScreen> { it ->
-                val route: Screen.DetailScreen = it.toRoute()
-                DetailScreen(navController)
+                DetailScreen()
             }
             composable<Screen.SearchScreen> {
-                SearchScreen(navController, snackBarHostState, onNavigateToDetail = { movie ->
+                SearchScreen(snackBarHostState, onNavigateToDetail = { movie ->
                     navController.navigate(Screen.DetailScreen(movie))
                 })
             }
             composable<Screen.BookmarkScreen> {
-                BookmarkScreen(navController){
+                BookmarkScreen {
                     navController.navigate(Screen.DetailScreen(it))
                 }
             }

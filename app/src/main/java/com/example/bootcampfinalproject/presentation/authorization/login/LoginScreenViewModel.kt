@@ -65,7 +65,8 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
     private fun updateFormValidation() {
-        isFormValid = emailError == null && passwordError == null
+        val isPasswordValid = passwordInput.length >= 6 && passwordError == null
+        isFormValid = emailError == null && isPasswordValid
     }
 
     fun login() {

@@ -11,19 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.presentation.home.component.HomeScreenContent
-import com.example.bootcampfinalproject.presentation.home.component.HomeScreenErrorComponent
-import com.example.bootcampfinalproject.presentation.home.component.Loading
+import com.example.bootcampfinalproject.presentation.component.ErrorComponent
+import com.example.bootcampfinalproject.presentation.component.Loading
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
-fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostState, onNavigateToDetail: (Int) -> Unit) {
+fun HomeScreen(snackBarHostState: SnackbarHostState, onNavigateToDetail: (Int) -> Unit) {
     val viewModel = hiltViewModel<HomeScreenViewModel>()
     val upComingMovies: LazyPagingItems<Movie> = viewModel.upComingMovies.collectAsLazyPagingItems()
     val topRatedMovies: LazyPagingItems<Movie> = viewModel.topRatedMovies.collectAsLazyPagingItems()
@@ -82,7 +81,7 @@ fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostStat
         ) {
             when (uiState.value) {
                 is HomeUiState.Error -> {
-                    HomeScreenErrorComponent()
+                    ErrorComponent()
                 }
 
                 HomeUiState.Loading -> {
@@ -90,7 +89,7 @@ fun HomeScreen(navController: NavController, snackBarHostState: SnackbarHostStat
                 }
 
                 else -> {
-                    HomeScreenContent(upComingMovies, topRatedMovies, navController, onNavigateToDetail)
+                    HomeScreenContent(upComingMovies, topRatedMovies, onNavigateToDetail)
                 }
             }
         }

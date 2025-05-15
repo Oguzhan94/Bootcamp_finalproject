@@ -2,6 +2,7 @@ package com.example.bootcampfinalproject.presentation.authorization.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -11,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import com.example.bootcampfinalproject.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmailTextField(
     value: String,
@@ -22,9 +24,11 @@ fun EmailTextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(
-           text = stringResource(R.string.email)
-        ) },
+        label = {
+            Text(
+                text = stringResource(R.string.email)
+            )
+        },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         isError = isError,
@@ -36,6 +40,7 @@ fun EmailTextField(
                     style = MaterialTheme.typography.labelSmall
                 )
             }
-        }
+        },
+        maxLines = 1
     )
 }

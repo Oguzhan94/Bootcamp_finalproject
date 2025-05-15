@@ -7,13 +7,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.bootcampfinalproject.domain.model.Movie
 import com.example.bootcampfinalproject.presentation.SearchScreenUiState
-import com.example.bootcampfinalproject.presentation.home.component.HorizontalCardComponent
+import com.example.bootcampfinalproject.presentation.component.horizontalcardcomponent.HorizontalCardComponent
 
 @Composable
-fun SearchResultColumn(uiState: SearchScreenUiState, navController: NavController, onNavigateToDetail: (Int) -> Unit){
+fun SearchResultList(
+    uiState: SearchScreenUiState,
+    onNavigateToDetail: (Int) -> Unit
+) {
     val movie = (uiState as SearchScreenUiState.Success).data
     LazyColumn(
         modifier = Modifier

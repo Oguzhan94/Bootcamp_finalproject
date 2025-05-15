@@ -62,13 +62,8 @@ fun SearchBarComponent(viewModel: SearchScreenViewModel, searchQuery: String) {
             },
             expanded = false,
             onExpandedChange = { },
-//            modifier = TODO(),
             shape = RoundedCornerShape(8.dp),
-//            colors = TODO(),
-//            tonalElevation = TODO(),
-//            shadowElevation = TODO(),
             windowInsets = WindowInsets(0, 0, 0, 0)
         ) {}
     }
-
 }

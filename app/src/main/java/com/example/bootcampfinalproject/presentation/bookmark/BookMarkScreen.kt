@@ -6,16 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.example.bootcampfinalproject.presentation.bookmark.component.BookmarkScreenSuccessComponent
-import com.example.bootcampfinalproject.presentation.detail.DetailScreenSuccessComponent
-import com.example.bootcampfinalproject.presentation.detail.DetailScreenUiState
-import com.example.bootcampfinalproject.presentation.home.component.HomeScreenErrorComponent
-import com.example.bootcampfinalproject.presentation.home.component.Loading
+import com.example.bootcampfinalproject.presentation.component.ErrorComponent
+import com.example.bootcampfinalproject.presentation.component.Loading
 
 @Composable
 fun BookmarkScreen(
-    navController: NavController,
     onNavigateToDetail: (Int) -> Unit
 ) {
     val viewModel = hiltViewModel<BookmarkScreenViewModel>()
@@ -27,14 +23,17 @@ fun BookmarkScreen(
     ) {
         when (val state = uiState.value) {
             is BookmarkScreenUiState.Error -> {
-                HomeScreenErrorComponent()
+                ErrorComponent()
             }
+
             BookmarkScreenUiState.Loading -> {
                 Loading()
             }
+
             is BookmarkScreenUiState.Success -> {
                 BookmarkScreenSuccessComponent(state.data, onNavigateToDetail)
             }
+
             else -> Unit
         }
     }

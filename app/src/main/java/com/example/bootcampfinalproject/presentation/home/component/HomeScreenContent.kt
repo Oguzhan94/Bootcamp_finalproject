@@ -12,16 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.model.Movie
+import com.example.bootcampfinalproject.presentation.component.horizontalcardcomponent.HorizontalCardComponent
 
 @Composable
 fun HomeScreenContent(
     upComingMovies: LazyPagingItems<Movie>,
     topRatedMovies: LazyPagingItems<Movie>,
-    navController: NavController,
     onNavigateToDetail: (Int) -> Unit
 ) {
     LazyColumn(

@@ -57,7 +57,8 @@ fun PasswordTextField(
                     style = MaterialTheme.typography.labelSmall
                 )
             }
-        }
+        },
+        maxLines = 1
 
     )
 }
