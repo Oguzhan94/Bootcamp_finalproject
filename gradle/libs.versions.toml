@@ -3,6 +3,7 @@ accompanistSwiperefresh = "0.24.13-rc"
 agp = "8.9.2"
 coilCompose = "2.2.2"
 coreSplashscreen = "1.0.1"
+datastorePreferences = "1.1.6"
 gson = "2.13.1"
 hiltNavigationCompose = "1.2.0"
 hiltVersion = "2.56.1"
@@ -28,6 +29,7 @@ paletteKtx = "1.0.0"
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }

@@ -94,5 +94,7 @@ dependencies {
     implementation (libs.accompanist.swiperefresh)
     //Palette
     implementation (libs.androidx.palette.ktx)
+    //DataStore
+    implementation(libs.androidx.datastore.preferences)
 }
 
