@@ -27,4 +27,7 @@
     <string name="screen_title">Movies</string>
     <string name="password_do_not_match">Passwords do not match</string>
     <string name="enter_your_name">Enter your name</string>
+    <string name="movie_poster">moviePoster</string>
+    <string name="movie_chip">movieChip</string>
+    <string name="rating_chip">ratingChip</string>
 </resources>

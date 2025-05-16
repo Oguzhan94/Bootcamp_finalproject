@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -94,7 +95,7 @@ fun DetailScreenHeader(
                 )
                 .build(),
             placeholder = painterResource(R.drawable.loading),
-            contentDescription = "",
+            contentDescription = stringResource(R.string.movie_poster),
             contentScale = ContentScale.FillBounds,
             error = painterResource(R.drawable.error),
             modifier = Modifier
@@ -108,7 +109,7 @@ fun DetailScreenHeader(
                 .allowHardware(false)
                 .build(),
             placeholder = painterResource(R.drawable.loading),
-            contentDescription = "",
+            contentDescription = stringResource(R.string.movie_poster),
             contentScale = ContentScale.FillBounds,
             error = painterResource(R.drawable.error),
             modifier = Modifier

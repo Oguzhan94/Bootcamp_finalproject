@@ -1,5 +1,6 @@
 package com.example.bootcampfinalproject.di
 
+import com.example.bootcampfinalproject.BuildConfig
 import com.example.bootcampfinalproject.data.remote.TmdbApi
 import com.example.bootcampfinalproject.util.Constants.BASE_URL
 import dagger.Module
@@ -18,8 +19,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val TMDB_API_KEY = "ecd2d80170f1033b7b88b470612fa6ec"
-
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
@@ -33,7 +32,7 @@ object NetworkModule {
                 val original = chain.request()
                 val requestBuilder = original.newBuilder()
                     .header("accept", "application/json")
-                    .url(original.url.newBuilder().addQueryParameter("api_key", TMDB_API_KEY).build())
+                    .url(original.url.newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY).build())
                     .method(original.method, original.body)
 
                 val request = requestBuilder.build()

@@ -1,5 +1,7 @@
 package com.example.bootcampfinalproject.data.repository
 
+import androidx.compose.ui.res.stringResource
+import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.data.local.BookmarkDao
 import com.example.bootcampfinalproject.data.local.mapper.toDomain
 import com.example.bootcampfinalproject.data.local.mapper.toEntity

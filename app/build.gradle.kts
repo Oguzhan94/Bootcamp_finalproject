@@ -1,3 +1,4 @@
+import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,6 +9,13 @@ plugins {
     alias(libs.plugins.kotlinx.serialization.plugin)
     alias(libs.plugins.kotlin.parcelize)
 }
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        file.inputStream().use { load(it) }
+    }
+}
+val tmdbApiKey = localProperties.getProperty("API_KEY") ?: ""
 
 android {
     namespace = "com.example.bootcampfinalproject"
@@ -21,6 +29,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"$tmdbApiKey\"")
     }
 
     buildTypes {
@@ -41,6 +51,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

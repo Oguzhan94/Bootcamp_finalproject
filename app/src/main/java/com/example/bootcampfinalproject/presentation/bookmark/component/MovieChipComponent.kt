@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.bootcampfinalproject.R
 
 @Composable
 fun MovieChipComponent(icon: ImageVector, text: String) {
@@ -35,7 +37,7 @@ fun MovieChipComponent(icon: ImageVector, text: String) {
         ) {
             Icon(
                 imageVector = icon,
-                contentDescription = "",
+                contentDescription = stringResource(R.string.movie_chip),
             )
             Spacer(Modifier.width(5.dp))
             Text(

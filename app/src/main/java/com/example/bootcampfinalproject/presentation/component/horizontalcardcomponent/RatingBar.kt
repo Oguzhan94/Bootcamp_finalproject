@@ -13,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.bootcampfinalproject.R
 import java.util.Locale
 
 @Composable
@@ -25,7 +27,7 @@ fun RatingBar(rating: Double) {
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = Icons.Default.Star,
-            contentDescription = "",
+            contentDescription = stringResource(R.string.rating_chip),
             tint = MaterialTheme.colorScheme.primary
         )
         Spacer(Modifier.width(4.dp))

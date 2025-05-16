@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -51,7 +52,7 @@ fun VerticalCardComponent(movie: Movie, onNavigateToDetail: (Int) -> Unit) {
                 .allowHardware(false)
                 .build(),
             placeholder = painterResource(R.drawable.loading),
-            contentDescription = "",
+            contentDescription = stringResource(R.string.movie_poster),
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.error),
             modifier = Modifier
@@ -80,7 +81,7 @@ fun VerticalCardComponent(movie: Movie, onNavigateToDetail: (Int) -> Unit) {
                 Icon(
                     modifier = Modifier.size(16.dp),
                     imageVector = Icons.Default.Star,
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.movie_poster)
                 )
                 Text(text = String.format(Locale("en"),"%.1f", movie.voteAverage))
             }

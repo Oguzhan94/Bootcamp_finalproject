@@ -58,7 +58,7 @@ class MovieRepositoryImpl @Inject constructor(
             genresList = response.genres
             ResponseState.Success(response.genres.map { it.toDomain() })
         } catch (e: Exception) {
-            ResponseState.Error(e.localizedMessage ?: "Bir hata oluştu")
+            ResponseState.Error(e.localizedMessage ?: "Unknown error")
         }
     }
 
@@ -72,7 +72,7 @@ class MovieRepositoryImpl @Inject constructor(
                     it.toDomain(genresList)
                 }))
         }.catch {
-            emit(ResponseState.Error(it.localizedMessage ?: "Bir hata oluştu"))
+            emit(ResponseState.Error(it.localizedMessage ?: "Unknown error"))
 
         }
     }
@@ -82,7 +82,7 @@ class MovieRepositoryImpl @Inject constructor(
             val response = api.getMovieDetails(movieId)
             ResponseState.Success(response.toDomain())
         } catch (e: Exception) {
-            ResponseState.Error(e.localizedMessage ?: "Bir hata oluştu")
+            ResponseState.Error(e.localizedMessage ?: "Unknown error")
         }
     }
 }
