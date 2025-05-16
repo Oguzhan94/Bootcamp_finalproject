@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.compose.rememberNavController
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreenViewModel
 import com.example.bootcampfinalproject.presentation.navigation.AppNavigation
 import com.example.bootcampfinalproject.presentation.navigation.Screen
