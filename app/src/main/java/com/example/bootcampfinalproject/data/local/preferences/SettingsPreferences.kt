@@ -27,4 +27,7 @@ class SettingsPreferences @Inject constructor(
             preferences[DARK_MODE_KEY] = enabled
         }
     }
+    suspend fun clear() {
+        dataStore.edit { it.clear() }
+    }
 }
