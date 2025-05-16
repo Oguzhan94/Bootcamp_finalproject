@@ -8,6 +8,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -39,6 +40,7 @@ import com.example.bootcampfinalproject.presentation.bookmark.BookmarkScreen
 import com.example.bootcampfinalproject.presentation.detail.DetailScreen
 import com.example.bootcampfinalproject.presentation.home.HomeScreen
 import com.example.bootcampfinalproject.presentation.search.SearchScreen
+import com.example.bootcampfinalproject.presentation.settings.SettingsScreen
 import kotlin.reflect.KClass
 
 data class BottomNavItem(
@@ -56,7 +58,8 @@ fun AppNavigation(startDestination: Screen) {
     val items = listOf(
         BottomNavItem("Home", Icons.Default.Home, Screen.HomeScreen),
         BottomNavItem("Search", Icons.Default.Search, Screen.SearchScreen),
-        BottomNavItem("Bookmark", Icons.AutoMirrored.Filled.LibraryBooks, Screen.BookmarkScreen)
+        BottomNavItem("Bookmark", Icons.AutoMirrored.Filled.LibraryBooks, Screen.BookmarkScreen),
+        BottomNavItem("Settings", Icons.Default.Settings, Screen.SettingsScreen)
     )
 
     fun isCurrentScreen(screen: KClass<out Screen>): Boolean {
@@ -155,6 +158,9 @@ fun AppNavigation(startDestination: Screen) {
                 BookmarkScreen {
                     navController.navigate(Screen.DetailScreen(it))
                 }
+            }
+            composable<Screen.SettingsScreen> {
+                SettingsScreen()
             }
         }
     }
