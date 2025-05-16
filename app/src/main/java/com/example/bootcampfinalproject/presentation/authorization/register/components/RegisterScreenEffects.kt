@@ -18,7 +18,7 @@ fun RegisterScreenEffects(
         when (uiState) {
             is AuthUiState.Success -> {
                 navController.navigate(Screen.HomeScreen) {
-                    popUpTo(Screen.RegisterScreen) { inclusive = true }
+                    popUpTo(0)
                 }
             }
 
