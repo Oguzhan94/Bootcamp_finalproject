@@ -9,15 +9,42 @@ import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LocalPolice
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import com.example.bootcampfinalproject.presentation.navigation.Screen
+import com.example.bootcampfinalproject.presentation.settings.components.LogoutAlertDialogComponent
+import com.example.bootcampfinalproject.presentation.settings.components.SettingsItemComponent
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(navController: NavController) {
+    val viewModel = hiltViewModel<SettingsScreenViewModel>()
+    val isDark by viewModel.isDarkMode.collectAsStateWithLifecycle()
+    val isLogout by viewModel.logoutSuccess.collectAsStateWithLifecycle()
+    var showLogoutDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isLogout) {
+        if (isLogout) {
+            navController.navigate(Screen.LoginScreen) {
+                popUpTo(0)
+            }
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,8 +65,8 @@ fun SettingsScreen() {
                 "Enable dark mode",
                 trailingContent = {
                     Switch(
-                        checked = true,
-                        onCheckedChange = { }
+                        checked = isDark,
+                        onCheckedChange = { viewModel.setDarkMode(it) }
                     )
                 }
             )
@@ -54,16 +81,17 @@ fun SettingsScreen() {
                 "Edit profile information"
             )
             SettingsItemComponent(
-                Icons.AutoMirrored.Default.Logout,
-                "Logout",
-                "Sign out of the app"
+                Icons.Default.Lock,
+                "Change Password",
+                "Change password"
+
             )
             SettingsItemComponent(
                 Icons.AutoMirrored.Default.Logout,
-                "Change Password",
-                "Change password"
-            ){
-                //burada cikis yapilacak
+                "Logout",
+                "Sign out of the app"
+            ) {
+                showLogoutDialog = true
             }
             Text(
                 text = "About",
@@ -82,4 +110,9 @@ fun SettingsScreen() {
             )
         }
     }
+    LogoutAlertDialogComponent(
+        onDismiss = { showLogoutDialog = false },
+        onConfirm = { viewModel.logout() },
+        showDialog = showLogoutDialog
+    )
 }

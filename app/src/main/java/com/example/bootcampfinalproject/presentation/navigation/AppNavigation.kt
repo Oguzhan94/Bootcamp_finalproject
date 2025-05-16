@@ -160,7 +160,7 @@ fun AppNavigation(startDestination: Screen) {
                 }
             }
             composable<Screen.SettingsScreen> {
-                SettingsScreen()
+                SettingsScreen(navController)
             }
         }
     }

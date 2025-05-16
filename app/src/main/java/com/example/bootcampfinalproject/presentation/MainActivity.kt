@@ -10,16 +10,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreenViewModel
 import com.example.bootcampfinalproject.presentation.navigation.AppNavigation
 import com.example.bootcampfinalproject.presentation.navigation.Screen
+import com.example.bootcampfinalproject.presentation.settings.SettingsScreenViewModel
 import com.example.bootcampfinalproject.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     private val viewModel: LoginScreenViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +36,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            AppTheme {
-                val navController = rememberNavController()
+            val settingsViewModel = hiltViewModel<SettingsScreenViewModel>()
+            val isDarkMode = settingsViewModel.isDarkMode.collectAsStateWithLifecycle()
+            AppTheme(darkTheme = isDarkMode.value) {
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
                 val startDestination = when (uiState) {
