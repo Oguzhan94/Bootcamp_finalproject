@@ -1,6 +1,6 @@
 package com.example.bootcampfinalproject.domain.repository
 
-import com.example.bootcampfinalproject.domain.Bookmark
+import com.example.bootcampfinalproject.domain.model.Bookmark
 import com.example.bootcampfinalproject.util.ResponseState
 
 interface  BookmarkRepository{

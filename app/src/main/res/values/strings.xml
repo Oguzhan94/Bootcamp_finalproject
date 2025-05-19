@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bootcamp Final Project</string>
+    <string name="app_name">Movie Spool</string>
     <string name="email_error">Please enter a valid email address.</string>
     <string name="password_error">Password must be at least 6 characters long.</string>"
     <string name="login_button_text">Login</string>

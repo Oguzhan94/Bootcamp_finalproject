@@ -26,7 +26,7 @@ fun UpcomingComponent(
         Spacer(Modifier.height(10.dp))
         Text(
             text = stringResource(R.string.up_coming_movies),
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleLarge
         )
         Spacer(Modifier.height(5.dp))
         LazyRow(

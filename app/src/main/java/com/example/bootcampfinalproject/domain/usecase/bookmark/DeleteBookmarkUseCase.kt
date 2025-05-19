@@ -1,6 +1,6 @@
 package com.example.bootcampfinalproject.domain.usecase.bookmark
 
-import com.example.bootcampfinalproject.domain.Bookmark
+import com.example.bootcampfinalproject.domain.model.Bookmark
 import com.example.bootcampfinalproject.domain.repository.BookmarkRepository
 import com.example.bootcampfinalproject.util.ResponseState
 import javax.inject.Inject

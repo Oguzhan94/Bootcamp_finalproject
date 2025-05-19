@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.navigation
+package com.example.bootcampfinalproject.navigation
 
 import kotlinx.serialization.Serializable
 

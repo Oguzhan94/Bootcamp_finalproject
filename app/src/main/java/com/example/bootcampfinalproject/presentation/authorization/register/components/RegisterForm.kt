@@ -23,7 +23,7 @@ import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.presentation.authorization.components.EmailTextField
 import com.example.bootcampfinalproject.presentation.authorization.components.PasswordTextField
 import com.example.bootcampfinalproject.presentation.authorization.register.RegisterScreenViewModel
-import com.example.bootcampfinalproject.presentation.navigation.Screen
+import com.example.bootcampfinalproject.navigation.Screen
 
 @Composable
 fun RegisterForm(

@@ -1,7 +1,7 @@
 package com.example.bootcampfinalproject.data.local.mapper
 
 import com.example.bootcampfinalproject.data.local.BookmarkEntity
-import com.example.bootcampfinalproject.domain.Bookmark
+import com.example.bootcampfinalproject.domain.model.Bookmark
 
 fun BookmarkEntity.toDomain(): Bookmark {
     return Bookmark(

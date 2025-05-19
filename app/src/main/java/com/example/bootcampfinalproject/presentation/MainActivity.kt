@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.bootcampfinalproject.presentation.authorization.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.login.LoginScreenViewModel
-import com.example.bootcampfinalproject.presentation.navigation.AppNavigation
-import com.example.bootcampfinalproject.presentation.navigation.Screen
+import com.example.bootcampfinalproject.navigation.AppNavigation
+import com.example.bootcampfinalproject.navigation.Screen
 import com.example.bootcampfinalproject.presentation.settings.SettingsScreenViewModel
 import com.example.bootcampfinalproject.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint

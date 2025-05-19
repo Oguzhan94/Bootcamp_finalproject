@@ -3,7 +3,7 @@ package com.example.bootcampfinalproject.presentation.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bootcampfinalproject.domain.Bookmark
+import com.example.bootcampfinalproject.domain.model.Bookmark
 import com.example.bootcampfinalproject.domain.model.MovieDetail
 import com.example.bootcampfinalproject.domain.usecase.auth.CurrentUserUseCase
 import com.example.bootcampfinalproject.domain.usecase.bookmark.DeleteBookmarkUseCase

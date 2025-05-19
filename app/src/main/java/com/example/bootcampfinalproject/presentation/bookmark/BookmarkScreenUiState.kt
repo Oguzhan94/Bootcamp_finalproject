@@ -1,6 +1,6 @@
 package com.example.bootcampfinalproject.presentation.bookmark
 
-import com.example.bootcampfinalproject.domain.Bookmark
+import com.example.bootcampfinalproject.domain.model.Bookmark
 
 sealed interface BookmarkScreenUiState{
     data object Idle : BookmarkScreenUiState

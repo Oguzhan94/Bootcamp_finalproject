@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation
+package com.example.bootcampfinalproject.presentation.authorization
 
 import com.google.firebase.auth.FirebaseUser
 

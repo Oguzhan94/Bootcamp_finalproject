@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.bootcampfinalproject.R
 import com.example.bootcampfinalproject.domain.usecase.auth.CurrentUserUseCase
 import com.example.bootcampfinalproject.domain.usecase.auth.LoginUseCase
-import com.example.bootcampfinalproject.presentation.AuthUiState
-import com.example.bootcampfinalproject.presentation.AuthUiState.Success
+import com.example.bootcampfinalproject.presentation.authorization.AuthUiState
+import com.example.bootcampfinalproject.presentation.authorization.AuthUiState.Success
 import com.example.bootcampfinalproject.util.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

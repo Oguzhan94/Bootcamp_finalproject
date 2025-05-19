@@ -7,7 +7,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import com.example.bootcampfinalproject.presentation.SearchScreenUiState
+import com.example.bootcampfinalproject.presentation.search.SearchScreenUiState
 
 @Composable
 fun SearchResultComponent(

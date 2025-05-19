@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.domain
+package com.example.bootcampfinalproject.domain.model
 
 data class Bookmark(
     val movieId: Int,

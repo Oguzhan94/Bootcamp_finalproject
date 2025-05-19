@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.example.bootcampfinalproject.presentation.navigation.Screen
+import com.example.bootcampfinalproject.navigation.Screen
 import com.example.bootcampfinalproject.presentation.settings.components.LogoutAlertDialogComponent
 import com.example.bootcampfinalproject.presentation.settings.components.SettingsItemComponent
 

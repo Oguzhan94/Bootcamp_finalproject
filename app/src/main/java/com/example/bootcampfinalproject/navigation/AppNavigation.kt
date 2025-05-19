@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.navigation
+package com.example.bootcampfinalproject.navigation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,8 +76,8 @@ fun AppNavigation(startDestination: Screen) {
             Column {
                 CenterAlignedTopAppBar(title = {
                     Text(
-                        text = stringResource(R.string.screen_title),
-                        style = MaterialTheme.typography.displayMedium
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.displaySmall
                     )
                 }, navigationIcon = {
                     if (isCurrentScreen(Screen.DetailScreen::class)) {

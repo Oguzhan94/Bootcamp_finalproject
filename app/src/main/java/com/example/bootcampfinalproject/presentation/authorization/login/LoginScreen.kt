@@ -13,10 +13,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.example.bootcampfinalproject.presentation.AuthUiState
+import com.example.bootcampfinalproject.presentation.authorization.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.login.components.LoginForm
 import com.example.bootcampfinalproject.presentation.authorization.login.components.LoginScreenEffects
-import com.example.bootcampfinalproject.presentation.navigation.Screen
+import com.example.bootcampfinalproject.navigation.Screen
 
 @Composable
 fun LoginScreen(

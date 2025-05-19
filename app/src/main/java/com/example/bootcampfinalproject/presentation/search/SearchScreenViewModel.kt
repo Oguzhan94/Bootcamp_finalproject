@@ -3,7 +3,6 @@ package com.example.bootcampfinalproject.presentation.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bootcampfinalproject.domain.usecase.movies.GetSearchUseCase
-import com.example.bootcampfinalproject.presentation.SearchScreenUiState
 import com.example.bootcampfinalproject.util.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

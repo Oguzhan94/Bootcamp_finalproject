@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.example.bootcampfinalproject.presentation.AuthUiState
+import com.example.bootcampfinalproject.presentation.authorization.AuthUiState
 import com.example.bootcampfinalproject.presentation.authorization.register.components.RegisterForm
 import com.example.bootcampfinalproject.presentation.authorization.register.components.RegisterScreenEffects
 

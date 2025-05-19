@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.bootcampfinalproject.presentation.SearchScreenUiState
+import com.example.bootcampfinalproject.presentation.search.SearchScreenUiState
 import com.example.bootcampfinalproject.presentation.component.horizontalcardcomponent.HorizontalCardComponent
 
 @Composable

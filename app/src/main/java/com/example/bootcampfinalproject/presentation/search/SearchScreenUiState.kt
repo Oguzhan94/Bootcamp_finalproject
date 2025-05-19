@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation
+package com.example.bootcampfinalproject.presentation.search
 
 import com.example.bootcampfinalproject.domain.model.Movie
 
