@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.bootcampfinalproject.presentation.bookmark.component.BookmarkScreenSuccessComponent
+import com.example.bootcampfinalproject.presentation.bookmark.components.BookmarkScreenSuccessComponent
 import com.example.bootcampfinalproject.presentation.component.ErrorComponent
 import com.example.bootcampfinalproject.presentation.component.Loading
 

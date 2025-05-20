@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.bookmark.component
+package com.example.bootcampfinalproject.presentation.bookmark.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

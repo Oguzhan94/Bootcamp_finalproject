@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.detail.component
+package com.example.bootcampfinalproject.presentation.detail.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box

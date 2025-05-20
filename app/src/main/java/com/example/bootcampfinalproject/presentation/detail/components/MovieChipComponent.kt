@@ -1,13 +1,10 @@
-package com.example.bootcampfinalproject.presentation.detail.component
+package com.example.bootcampfinalproject.presentation.detail.components
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -19,8 +16,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bootcampfinalproject.R
-import com.example.bootcampfinalproject.domain.model.Movie
-import com.example.bootcampfinalproject.domain.model.MovieDetail
 
 @Composable
 fun MovieChipComponent(icon: ImageVector, text: String){

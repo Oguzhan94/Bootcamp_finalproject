@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.bookmark.component
+package com.example.bootcampfinalproject.presentation.bookmark.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable

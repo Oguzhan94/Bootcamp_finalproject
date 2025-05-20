@@ -44,6 +44,48 @@ MovieSpool is a modern Android application built with Jetpack Compose and struct
 - **Palette API** – UI color extraction
 - **SwipeRefresh (Accompanist)** – Pull-to-refresh
 
+## 🧠 State Management
+### 📦 Response State Wrapper
+
+To represent the result of network or data operations consistently across the app:
+```
+sealed class ResponseState<out T> {
+    object Loading : ResponseState<Nothing>()
+    data class Error(val message: String) : ResponseState<Nothing>()
+    data class Success<T>(val data: T) : ResponseState<T>()
+}
+```
+
+### 🧩 UI States (per screen)
+Each screen defines its own sealed interface to represent its UI state clearly. Here's an example from the DetailScreen:
+```
+sealed interface DetailScreenUiState {
+    data object Idle : DetailScreenUiState
+    data object Loading : DetailScreenUiState
+    data class Success(val data: MovieDetail) : DetailScreenUiState
+    data class Error(val message: String) : DetailScreenUiState
+}
+```
+This interface is exposed as a StateFlow from the ViewModel:
+```
+private val _uiState = MutableStateFlow<DetailScreenUiState>(DetailScreenUiState.Idle)
+val uiState: StateFlow<DetailScreenUiState> = _uiState.asStateFlow()
+```
+
+And then observed in the UI layer using collectAsStateWithLifecycle():
+
+```
+val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+
+when (val state = uiState.value) {
+    is DetailScreenUiState.Error -> ErrorComponent()
+    DetailScreenUiState.Loading -> Loading()
+    is DetailScreenUiState.Success -> DetailScreenSuccessComponent(state.data, viewModel)
+    else -> Unit
+}
+```
+This pattern improves testability, decouples UI from business logic, and aligns well with the Unidirectional Data Flow (UDF) principle.
+
 ## 📂 Project Structure
 Below is the overview of the project directory structure, reflecting Clean Architecture principles and modular UI components.
 ```
@@ -68,21 +110,21 @@ Below is the overview of the project directory structure, reflecting Clean Archi
 ├── navigation
 ├── presentation
 │ ├── authorization
-│ │ └── components
-│ ├── login
-│ │ └── components
-│ ├── register
-│ │ └── components
+│ |  └── components
+│ |  ├── login
+│ |  │ └── components
+│ |  ├── register
+│ |  │ └── components
 │ ├── bookmark
 │ │ └── components
 │ ├── detail
-│ │ └── component
+│ │ └── components
 │ ├── home
-│ │ └── component
+│ │ └── components
 │ ├── search
-│ │ └── component
+│ │ └── components
 │ ├── settings
-│ │ └── component
+│ │ └── components
 │ ├── component
 │ └── theme
 ├── util

@@ -8,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.bootcampfinalproject.presentation.component.ErrorComponent
 import com.example.bootcampfinalproject.presentation.component.Loading
+import com.example.bootcampfinalproject.presentation.detail.components.DetailScreenSuccessComponent
 
 @Composable
 fun DetailScreen() {

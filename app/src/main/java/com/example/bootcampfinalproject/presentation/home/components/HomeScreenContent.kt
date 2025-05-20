@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.home.component
+package com.example.bootcampfinalproject.presentation.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

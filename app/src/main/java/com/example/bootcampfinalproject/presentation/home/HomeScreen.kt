@@ -15,9 +15,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.bootcampfinalproject.domain.model.Movie
-import com.example.bootcampfinalproject.presentation.home.component.HomeScreenContent
 import com.example.bootcampfinalproject.presentation.component.ErrorComponent
 import com.example.bootcampfinalproject.presentation.component.Loading
+import com.example.bootcampfinalproject.presentation.home.components.HomeScreenContent
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -70,14 +70,15 @@ fun HomeScreen(snackBarHostState: SnackbarHostState, onNavigateToDetail: (Int) -
         }
     }
 
-    SwipeRefresh(
-        state = swipeRefreshState,
-        onRefresh = { viewModel.refreshData() }
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp)
+    )
+    {
+        SwipeRefresh(
+            state = swipeRefreshState,
+            onRefresh = { viewModel.refreshData() }
         ) {
             when (uiState.value) {
                 is HomeUiState.Error -> {

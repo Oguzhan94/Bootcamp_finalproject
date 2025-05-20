@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.home.component
+package com.example.bootcampfinalproject.presentation.home.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

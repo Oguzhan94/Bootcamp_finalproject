@@ -1,4 +1,4 @@
-package com.example.bootcampfinalproject.presentation.detail
+package com.example.bootcampfinalproject.presentation.detail.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,8 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bootcampfinalproject.domain.model.MovieDetail
-import com.example.bootcampfinalproject.presentation.detail.component.DetailScreenHeader
-import com.example.bootcampfinalproject.presentation.detail.component.MovieChipComponent
+import com.example.bootcampfinalproject.presentation.detail.DetailScreenViewModel
 import com.example.bootcampfinalproject.util.formatWithSuffix
 import java.util.Locale
 
